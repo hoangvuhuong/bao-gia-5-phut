@@ -1,0 +1,336 @@
+body {
+    font-family: "Roboto";
+    font-size: 14px;
+}
+
+@page {
+  	margin-top: 0cm;
+    margin-left: 0cm;
+    margin-right: 0cm;
+    margin-bottom: 0cm;
+
+    size: A4 landscape;
+  	box-sizing: border-box;
+}
+
+div.cover-page {
+	height: 793.5px;
+    margin: 0px;
+    page-break-before: always
+}
+
+div.thanksyou-page {
+	height: 793.5px;
+    page-break-before: always
+}
+
+div.plan-page {
+    margin-top: 60px;
+    margin-left: 60px;
+    margin-right: 60px;
+    margin-bottom: 60px;
+    page-break-before: always
+}
+
+div.normal-page {
+    margin-top: 60px;
+    margin-left: 60px;
+    margin-right: 60px;
+    margin-bottom: 60px;
+    page-break-before: always
+}
+
+div.content {
+	margin-top: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+}
+
+#pagenumber:before {
+    content: counter(page);
+}
+
+#pagecount:before {
+    content: counter(pages);
+}
+
+.logo-container {
+    text-align: right;
+}
+
+.page-count {
+    text-align: right;
+}
+
+.logo {
+    width: 275px;
+}
+
+.report-sms {
+    width: 300px;
+}
+
+.report-email {
+    width: 400px;
+}
+
+.report-guru {
+    width: 800px;
+}
+
+.image-two {
+    width: 500px;
+}
+
+.services {
+	width: 1024px;
+}
+
+img{
+    width: 100%;
+    object-fit: contain;
+}
+
+h1 {
+    font-size: 2.6em;
+    margin-bottom: 15px;
+    margin-top: 15px;
+}
+
+h1.center {
+	text-align: center;
+}
+
+h2.center {
+	text-align: center;
+}
+
+h2.cover {
+	font-size: 2.6em;
+}
+
+p {
+    font-size: 14px;
+}
+
+.footer {
+    text-align: center;
+}
+
+@font-face {
+    font-family: "Bar-Code 39";
+    src: url(Code39.ttf) format('truetype');
+}
+
+.barcode {
+    font-family: "Bar-Code 39";
+    font-size: 26px;
+}
+
+.right {
+    text-align: right;
+}
+
+.left {
+    text-align: left;
+}
+
+.center {
+	text-align: center;
+}
+
+.bottom {
+    vertical-align: bottom;
+}
+
+.contact-block {
+    height: 68px;
+}
+
+.plantable-block {
+    align-items: center;
+}
+.float-left{float: left;}
+.float-right{float: right;}
+table {
+    width: 100%;
+}
+
+table td.cover {
+	width: 50%;
+	height: 100px;
+}
+
+table.planTable {
+  border-spacing: 0px;
+  border-collapse: collapse;
+  width: 100%;
+  background: #000000;
+}
+
+table.planTable td, table.planTable th {
+  border: solid #666 1px;
+}
+
+table.feeTable {
+  border-spacing: 0px;
+  border-collapse: collapse;
+  width: 100%;
+  text-align: center;
+  margin-bottom: 5%
+}
+
+table.feeTable td, table.feeTable th {
+  border: solid #666 1px;
+  padding: 11px 2px;
+  color: #fff;
+  font-size: 16px;
+}
+
+table.feeTable td.details {
+  color: #000000;
+  font-size: 16px;
+}
+
+table.feeTable tbody td {
+  font-size: 16px;
+}
+
+table.feeTable tbody td.left {
+  	text-align: left;
+}
+
+table.feeTable tbody td.black {
+	color: #000000;
+}
+
+table.feeTable tr.title {
+  background: #628DCF;
+  font-weight: bold;
+}
+
+table.planTable th, table.planTable td{
+  padding: 5px
+}
+
+table.planTable th {
+  background: #FBE5A2;
+  color: #000000;
+}
+table.planTable td{
+  background: #FFFFFF;
+  color: #000000;
+}
+
+table.planTable tbody td {
+  font-size: 14px;
+}
+
+table.planTable tbody td.bold {
+  font-weight: bold;
+}
+
+table.planTable tbody td.right {
+  text-align: right;
+}
+
+table.planTable tbody td.right.bold {
+  font-weight: bold;
+}
+
+table.planTable tbody td.bold.bkgYellow {
+  background-color: #FFE598;
+  font-weight: bold;
+}
+
+hr {
+    background-color: #000000;
+    height: 1px;
+}
+
+.page-break {
+    page-break-after: always;
+}
+
+.next-page {
+    page-break-before: always
+}
+
+header{
+	background: #fff; 
+	height: 0.6cm; 
+	padding: 1em 3em
+}
+
+@media print {
+  body, page {
+    margin: 0;
+    box-shadow: 0;
+  }
+}
+
+#cover {
+    background: url(../images/cover.jpg) no-repeat;
+    background-size: cover;
+}
+
+#cover header a {
+	font-weight: 600; 
+	color: #f58220; 
+	text-decoration: none;
+}
+
+#cover h1 {
+    text-align: center;
+    font-size: 2.6em;
+    margin-top: 26%;
+}
+
+.text-center{
+  text-align: center !important;
+}
+
+tr.total td {
+    color: #000;
+    text-align: right;
+}
+
+.total h3 {
+    color: #0089d1;
+    margin: 0.2em 0;
+}
+
+ul , ol{
+	margin: 0
+}
+
+li {
+    margin: 0.5em 0;
+}
+
+.blue {
+    background: #0089d1;
+}
+
+.yellow {
+    background: #ffca08;
+}
+
+.orange {
+    background: #f78222;
+}
+
+.green {
+    background: #38a053;
+}
+
+.grey {
+    background: #666;
+    padding: 30px 2px !important
+}
+
+.w30{width: 30%}
+.w70{width: 70%}
+.w40{width: 40%}
+.w60{width: 60%}

@@ -1,0 +1,25 @@
+<div th:fragment="letterhead">
+    <table>
+        <tr class="contact-block">
+            <td class="cover center">
+                <p>
+	                <b>Đơn vị: </b>[[${data.quotation.partnerName}]]<br />
+	                <b>Website: </b>[[${data.quotation.partnerWebsite}]]<br />
+	                <b>Người phụ trách: </b>[[${data.quotation.inChargePartner}]]
+                </p>
+            </td>
+            <td class="cover center">
+            	<p>
+	                <b>Phụ trách AdsPlus: </b>[[${data.inChargeUser}]]<br />
+	                <b>Email: </b>[[${data.inChargeUsername}]]<br />
+	                <b>Số di động: </b>[[${data.inChargeUserPhone}]]
+                </p>
+            </td>
+        </tr>
+        <tr>
+        	<td class="cover" colspan="2">
+        	<h2 class="center cover">QUẢN LÝ VÀ TỐI ƯU QUẢNG CÁO</h2>
+        	</td>
+        </tr>
+    </table>
+</div>

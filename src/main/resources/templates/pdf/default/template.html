@@ -1,0 +1,226 @@
+<!DOCTYPE html5>
+<html xmlns:th="http://www.thymeleaf.org">
+
+    <head>
+        <meta charset="UTF-8" content="HTML,CSS,XML,JavaScript" />
+        <link rel="stylesheet" type="text/css" media="all" href="css/style.css"/>
+    </head>
+
+    <body>
+    	<div class="cover-page" id="cover">
+	    	<div class="content">
+				<div class='header' th:include="header::header"></div>
+	
+	        	<div th:include="letterhead::letterhead"></div>
+	        
+			</div>
+		</div>
+		
+		
+		
+		
+		<th:block th:each="plan : ${data.quotation.plan}">
+		<div class="plan-page">
+			<h1 class="center" th:text="${plan.name}">KẾ HOẠCH KINH PHÍ </h1>
+			    <table cellspacing="1" cellpadding="0" class="planTable">
+			      <tr>
+			        <th width="17%">Loại hình quảng cáo</th>
+			        <th width="24%">Mục tiêu quảng cáo</th>
+			        <th>Tính phí<br/>(CPC/CPV) *</th>
+			        <th>Thời gian<br/>(tháng)</th>
+			        <th>Đơn giá<br/>(CPC/CPV) *</th>
+			        <th>KPIs số lượng<br/>(Click, CPV) *</th>
+			        <th>Hiển thị quảng cáo</th>
+			        <th>Ước tính tỷ lệ nhấp Quảng cáo (CTR)</th>
+			        <th>Chi phí VNĐ</th>
+			      </tr>
+			      <th:block th:each="type : ${plan.type}">
+			      <tr>
+			        <td th:text="${type.type}">Google tìm kiếm</td>
+			        <td th:utext="${type.target}">
+			          - Phạm vi: HN, HP, TH, ĐN, HCM<br/>
+			          - Hiển thị trong ngày<br/>
+			          - Thiết bị: PC, Mobile
+			        </td>
+			        <td class="text-center" th:text="${type.charged}">CPC</td>
+			        <td class="text-center"> 1,0</td>
+			        <td class="text-center" th:text="${#numbers.formatDecimal(type.price, 0, 'POINT', 0, 'COMMA')}">6.00</td>
+			        <td class="text-center" th:text="${#numbers.formatDecimal(type.getKpi(), 0, 'POINT', 0, 'COMMA')}">25.000</td>
+			        <td class="text-center" th:text="${#numbers.formatDecimal(type.display, 0, 'POINT', 0, 'COMMA')}">277.63</td>
+			        <td class="text-center" th:text="${#numbers.formatDecimal(type.ctr, 0, 'POINT', 1, 'COMMA')} + '%'">11.00%</td>
+			        <td class="right" th:text="${#numbers.formatDecimal(type.getS1(), 0, 'POINT', 0, 'COMMA')}">150.000.000</td>
+			      </tr>
+			       </th:block>
+			       
+			      <tr class="total">
+			        <td colspan="7"><h3>TỔNG NGÂN SÁCH QUẢNG CÁO</h3></td>
+			        <td></td>
+			        <td th:text="${#numbers.formatDecimal(plan.getS(), 0, 'POINT', 0, 'COMMA')}">280.000.000</td>
+			      </tr>
+			      <tr class="total">
+			        <td colspan="7">Phí chuyển khai và tối ưu hiệu quả chiến lược</td>			        
+			        <td class="text-center" th:text="${plan.getImplCostPercent()} + '%'">12%</td>
+			        <td th:text="${#numbers.formatDecimal(plan.getImplCost(), 0, 'POINT', 0, 'COMMA')}">280.000.000</td>
+			      </tr>
+			      <th:block th:if='${data.quotation.vat =="YES"}'>
+			      <!-- <tr class="total">
+			        <td colspan="7">Thuế nhà thầu: Ngân sách (1-5%) * 5%</td>
+			        <td></td>
+			        <td th:text="${#numbers.formatDecimal(plan.getFCT(), 0, 'POINT', 0, 'COMMA')}">280.000.000</td>
+			      </tr> -->
+			      <tr class="total">
+			        <td colspan="7">Tổng cộng ( chưa bao gồm VAT)</td>
+			        <td></td>
+			        <td th:text="${#numbers.formatDecimal(plan.getTotalWithoutVAT(), 0, 'POINT', 0, 'COMMA')}">280.000.000</td>
+			      </tr>
+			      <tr class="total">
+			        <td colspan="7">VAT 10%</td>
+			        <td></td>
+			        <td th:text="${#numbers.formatDecimal(plan.getVAT(), 0, 'POINT', 0, 'COMMA')}">280.000.000</td>
+			      </tr>
+			      <tr class="total">
+			        <td colspan="7">Tổng công (đã bao gồm VAT)</td>
+			        <td></td>
+			        <td th:text="${#numbers.formatDecimal(plan.getTotal(), 0, 'POINT', 0, 'COMMA')}">280.000.000</td>
+			      </tr>
+			      </th:block>
+			      <th:block th:if='${data.quotation.vat =="NO"}'>
+			      <tr class="total">
+			        <td colspan="7">Tổng công (không bao gồm VAT)</td>
+			        <td></td>
+			        <td th:text="${#numbers.formatDecimal(plan.getTotalWithoutVatFct(), 0, 'POINT', 0, 'COMMA')}">280.000.000</td>
+			      </tr>
+			      </th:block>
+			    </table>
+		</div>
+		</th:block>
+		<th:block th:each="plan,kehoach : ${data.listKeywordPagination}">
+		<th:block th:each="trang,pageindex : ${plan}">
+		
+		<div class="plan-page">
+		<!-- <th:block  th:if="${kehoach.index ==0 }"> -->
+		<h1>AdsPlus.vn</h1>
+		<div class="row">
+		<div class="input-group col-lg-3 col-md-3 col-sm-3 pb-4">
+		<b>Ngày báo giá:</b>
+		</div>
+		<p th:text=" ${data.quotation.dueDate}">01/01/2019</p>
+		</div>
+		
+		<!-- </th:block> -->
+		<th:block  th:if="${pageindex.index ==0 }">
+			<h1 class="center" >Từ khóa và các chỉ số <span th:text="${data.quotation.plan[kehoach.index].name}"></span> </h1>
+			</th:block>
+			<table cellspacing="1" cellpadding="0" class="planTable">
+			<tr>
+			    <th>Từ Khóa</th>
+			    <th>Monthly Clicks</th>
+			    <th>Monthly Impressions</th>
+			    <th>Giá tiền</th>
+			    <th>Ctr</th>
+			    <th>CPC Trung bình</th>
+			  </tr>
+			  <th:block th:each="keyword,iter : ${trang}">
+			  <tr>
+			    <td class="text-center" th:text="${keyword.keyword}">ABC</td>
+			        <td class="text-center" th:text="${#numbers.formatDecimal(keyword.dailyClicks, 0, 'POINT', 0, 'COMMA')}">6.00</td>
+			        <td class="text-center" th:text="${#numbers.formatDecimal(keyword.dailyImpressions, 0, 'POINT', 0, 'COMMA')}">25.000</td>
+			        <td class="text-center" th:text="${#numbers.formatDecimal(keyword.cost, 0, 'POINT', 1, 'COMMA')} ">11.00</td>
+			        <td class="text-center" th:text="${#numbers.formatDecimal(keyword.ctr*100, 0, 'POINT', 2, 'COMMA')} + '%'">20</td>
+			        <td class="text-center" th:text="${#numbers.formatDecimal(keyword.averageCpc, 0, 'POINT', 0, 'COMMA')}">277.63</td>
+			  </tr>
+			  
+			  <!-- <div style="page-break-after: always; width: 100%; height: 500px; background-color: beige; border: 2px solid gray; text-align: center" >
+			  </div> -->
+			 <!--  <div th:if="${iter.index %10 ==9 }" style="page-break-before:always">&nbsp;</div>  -->
+			  
+			  </th:block>
+			</table>
+		</div>
+		</th:block>
+		</th:block>
+		<div class="normal-page">
+			<div>
+	        	<h1 class="center">BẢNG PHÍ DỊCH VỤ CHUNG</h1>
+	        	<div th:include="feetable::feetable"></div>
+	        </div>
+	        
+	        <div>
+	        	<h2 class="center">CÔNG VIỆC ADSPLUS SẼ TRIỂN KHAI</h2>
+	        	<p>
+					+ Phân tích sản phẩm dịch vụ website muốn quảng cáo<br />
+					+ Viết mẫu quảng cáo phù hợp sản phẩm và bộ từ khóa quảng cáo<br />
+					+ Thiêt lập quảng cáo theo bộ từ khóa/mẫu quảng cáo đã chốt<br />
+					+ Thiết lập tiện ích miễn phí: địa điểm, cuộc gọi, link mở rộng ( các dịch vụ/sản phẩn liên quan), tiện ích chú thích để quảng cáo nổi bật khi hiển thị tìm kiếm.<br />
+					+ Thiết lập quảng cáo theo tỉnh thành. Thiết lập quảng cáo theo bán kính địa điểm kinh doanh<br />
+					+ Triển khai Remarketing giúp doanh nghiệp gia tăng lượt khách hàng quay trở lại website và thực hiện mua hàng.<br />
+					+ Đề xuất thay đổi nội dung, tối ưu website và tối ưu quảng cáo để đảm bảo hiệu quả của chiến dịch.<br />
+					+ Hỗ trợ cài đặt công cụ đo lường và theo dõi tỷ lệ chuyển đổi từ quảng cáo.<br />
+					+ Báo cáo hàng ngày/tuần/tháng về kết quả chiến dịch giúp quý khách theo sát hiệu quả chiến dịch<br />
+				</p>
+	        </div>
+	        <hr />
+	        <div>
+	        	<h2 class="center">CHÚ THÍCH KẾ HOẠCH KINH PHÍ MARKETING</h2>
+	        	<ol>
+			        <li>CPC (cost per click): Chi phí cho mỗi nhấp chuột</li>
+			        <li>Click: Số lượng nhấp chuột vào mẫu quảng cáo</li>
+			        <li>Tính phí: Cách tính phí của Google cho 1 click chuột hoặc xem quảng cáo</li>
+			        <li>Chi phí (VNĐ): Cho các loại hình quảng cáo với 100% ngân sách thanh toán cho Google để triển khai tối ưu chiến dịch</li>
+			        <li>CPV (cost per view): Đơn giá trên 1 lượt xem quảng cáo hoặc tương tác với video khi quảng cáo hình thức Video</li>
+			     </ol>
+	        </div>
+		</div>
+        
+        <div class="normal-page">
+        	<h1 class="center">HỆ THỐNG BÁO CÁO CHIẾN DỊCH TẠI ADSPLUS</h1>
+        	<div th:include="report::report"></div>
+        </div>
+        
+        <div class="normal-page">
+        	<h2 class="center">1. BÁO CÁO TRỰC TIẾP TỪ GOOGLE</h2>
+        	<img src="images/report-google.png" alt="Google report" />
+        </div>
+        
+        <div class="normal-page">
+        	<table>
+				<tbody>
+					<tr>
+						<td>
+							<h2>2. BÁO CÁO SMS HÀNG NGÀY</h2>
+							(Nhận báo cáo vắn tắt đến số điện thoại di động hàng ngày giúp Quý khách nắm được thông tin tình hình cơ bản của chiến dịch)
+						</td>
+						<td>
+							<h2>3. BÁO CÁO EMAIL HÀNG TUẦN VÀ TỔNG KẾT CHIẾN DỊCH</h2>
+							(Nhận báo cáo CHI TIẾT hàng tuần giúp Quý khách nắm được thông tin và điều chỉnh chiến dịch phù hợp)
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<div class="report-sms">
+								<img src="images/report-sms.png" alt="SMS report" />
+							</div>
+							
+						</td>
+						<td>
+        					<div class="report-email">
+								<img src="images/report-email.png" alt="Email report" />
+							</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+        </div>
+        
+        <div class="normal-page">
+        	<h2 class="center">4. BÁO CÁO TRỰC TUYẾN DUY NHẤT TẠI GURU.ADSPLUS.VN</h2>
+        	<img src="images/report-guru.png" alt="Guru report" />
+        </div>
+        
+        <div class="normal-page">
+        	<h2 class="center">5. BÁO CÁO GOOGLE DATA STUDIO</h2>
+        	<img src="images/report-datastudio.png" alt="Data studio report" />
+        </div>
+    </body>
+
+</html>

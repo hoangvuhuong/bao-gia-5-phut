@@ -1,0 +1,72 @@
+<div th:fragment="plantable">
+	<table class="planTable">
+	<tbody>
+	<tr>
+	<td rowspan="2" class="bold bkgYellow">Loại hình quảng cáo</td>
+	<td rowspan="2" class="bold bkgYellow">Mục tiêu quảng cáo</td>
+	<td rowspan="2" class="bold bkgYellow">Tính phí<br />(CPC/CPV)*</td>
+	<td rowspan="2" class="bold bkgYellow">THời gian<br />(tháng)</td>
+	<td colspan="4" class="bold bkgYellow">ƯỚC LƯỢNG KẾT QUẢ ĐẠT ĐƯỢC</td>
+	<td rowspan="2" class="bold bkgYellow">Chi Phí<br />(VNĐ)</td>
+	</tr>
+	<tr>
+	<td class="bold bkgYellow">Đơn giá<br />(CPC/CPV)</td>
+	<td class="bold bkgYellow">KPIs Số lượng<br />(CLICK, CPV)</td>
+	<td class="bold bkgYellow">Hiển thị<br />Quảng cáo</td>
+	<td class="bold bkgYellow">Ước tính<br />Tỷ lệ<br />Nhấp<br />Quảng cáo<br />(CTR)</td>
+	</tr>
+	<tr>
+	<td>Google tìm kiếm</td>
+	<td>- Phạm vi: Hồ Chí Minh<br />- Hiển thị trong ngày<br />- Thiết bị: PC, Mobile</td>
+	<td>CPC</td>
+	<td>1</td>
+	<td>[[${data.getPrice()}]]</td>
+	<td>[[${data.getTotal_kpis()}]]</td>
+	<td>[[${data.getDisplay()}]]</td>
+	<td>[[${data.getCtr()}]]</td>
+	<td>[[${data.getCost()}]]</td>
+	</tr>
+	<tr>
+	<td>Tiếp thị lại<br />(Remarketing)</td>
+	<td>Tất cả người dùng truy cập website trong vòng 7 ngày/14 ngày</td>
+	<td></td>
+	<td>1</td>
+	<td>[[${data.getPrice_re()}]]</td>
+	<td>[[${data.getTotal_kpis_re()}]]</td>
+	<td>[[${data.getDisplay_re()}]]</td>
+	<td>[[${data.getCtr_re()}]]</td>
+	<td>[[${data.getCost_re()}]]</td>
+	</tr>
+	<tr>
+	<td colspan="7" class="right bold">TỔNG NGÂN SÁCH QUẢNG CÁO</td>
+	<td>cell8_5</td>
+	<td>cell9_5</td>
+	</tr>
+	<tr>
+	<td colspan="7" class="right">Phí triển khai và tối ưu hiệu quả chiến dịch</td>
+	<td>cell8_6</td>
+	<td>cell9_6</td>
+	</tr>
+	<tr>
+	<td colspan="7" class="right">Thuế nhà thầu</td>
+	<td>cell8_7</td>
+	<td>cell9_7</td>
+	</tr>
+	<tr>
+	<td colspan="7" class="right">Tổng cộng (thuế nhà thầu + chưa bao gồm VAT)</td>
+	<td>cell8_8</td>
+	<td>cell9_8</td>
+	</tr>
+	<tr>
+	<td colspan="7" class="right">VAT (10%)</td>
+	<td>cell8_9</td>
+	<td>cell9_9</td>
+	</tr>
+	<tr>
+	<td colspan="7" class="right">Tổng cộng (đã bao gồm VAT+Thuế nhà thầu)</td>
+	<td>cell8_10</td>
+	<td>cell9_10</td>
+	</tr>
+	</tbody>
+	</table>
+</div>

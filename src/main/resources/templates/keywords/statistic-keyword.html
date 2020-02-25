@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" lang="vi"
+	layout:decorate="~{layout/master}">
+<head>
+<title>Báo giá của tôi</title>
+<style type="text/css">
+td {
+	vertical-align: top !important;
+}
+
+table {
+	margin: 0 auto;
+}
+</style>
+</head>
+<body>
+
+	<!-- /* Content of this page will be decorated by the elements of layout.html (task/layout) */ -->
+	<div layout:fragment="content">
+		<div class="modal fade" id="modal-error" tabindex="-1" role="dialog"
+			aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">Oop!</h5>
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<input id="deleteId" class="d-none" />
+						<div class="form-group m-form__group" style="color: red">Có
+							lỗi xảy ra khi tạo báo giá!</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<table
+			class="table table-striped- table-bordered table-hover table-checkable dataTable no-footer dtr-inline"
+			id="m_table_1" role="grid" aria-describedby="m_table_1_info"
+			style="width: 100%;">
+		</table>
+	</div>
+</body>
+<th:block layout:fragment="script-block">
+	<script th:inline="javascript">
+	console.log([[${statistic}]]);
+	$('#m_table_1').DataTable({
+		destroy: true,
+		"data":[[${statistic}]],
+		"columns" : [ {
+			"data" : "date",
+			"title" : "date"
+		}, {
+			"data" : "created_by",
+			"title" : "created_by",
+			
+		},  {
+			"data" : 'count',
+			"title" : "count ",
+			
+		}]
+	});		
+	</script>
+</th:block>
+</html>

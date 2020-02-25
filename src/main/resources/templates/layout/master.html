@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" lang="vi">
+<!-- begin::Head -->
+<head>
+<meta charset="utf-8" />
+<title></title>
+<meta name="description" content="">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="_csrf" th:content="${_csrf.token}" />
+<meta name="_csrf_header" th:content="${_csrf.headerName}" />
+<!--begin::Web font -->
+<script
+	src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.16/webfont.js"></script>
+<script>
+	WebFont.load({
+		google : {
+			"families" : [ "Roboto:300,400,500,600,700" ]
+		},
+		active : function() {
+			sessionStorage.fonts = true;
+		}
+	});
+</script>
+<!--end::Web font -->
+<!--begin::Base Styles -->
+<!--begin::Page Vendors -->
+
+<!--end::Page Vendors -->
+<link
+	th:href="@{/resources/theme/metronic5/assets/vendors/base/vendors.bundle.css}"
+	rel="stylesheet" type="text/css" />
+	
+<link
+	th:href="@{/resources/theme/metronic5/assets/css/datatables.bundle.css}"
+	rel="stylesheet" type="text/css" />	
+
+<link
+	th:href="@{/resources/theme/metronic5/assets/css/style.bundle.css}"
+	rel="stylesheet" type="text/css" />
+
+<link th:href="@{/resources/css/main.css}" rel="stylesheet"
+	type="text/css" />
+
+<!-- <link
+	th:href="@{/resources/theme/metronic5/assets/css/style.custom.css}"
+	rel="stylesheet" type="text/css" /> -->
+<!--end::Base Styles -->
+<!--		<link rel="shortcut icon" href="/theme/metronic5/assets/demo/default/media/img/logo/favicon.ico" />-->
+
+
+</head>
+<!-- end::Head -->
+<th:block layout:fragment="style-block"></th:block>
+<style type="text/css">
+td {
+	vertical-align: top !important;
+}
+
+table {
+	margin: 0 auto;
+}
+
+progress-bar {
+	height: 100% !important;
+}
+</style>
+<body
+	class="m-page--fluid m--skin- m-content--skin-light2 m-header--fixed m-header--fixed-mobile m-aside-left--enabled m-aside-left--skin-dark m-aside-left--offcanvas m-footer--push m-aside--offcanvas-default  ">
+	<!-- begin:: Page -->
+	<div class="m-grid m-grid--hor m-grid--root m-page">
+		<!-- BEGIN: Header -->
+		<header class="m-grid__item    m-header " data-minimize-offset="200"
+			data-minimize-mobile-offset="200">
+			<div class="m-container m-container--fluid m-container--full-height">
+				<div class="m-stack m-stack--ver m-stack--desktop">
+					<!-- BEGIN: Brand -->
+					<div class="m-stack__item m-brand  m-brand--skin-dark ">
+						<div class="m-stack m-stack--ver m-stack--general">
+							<div class="m-stack__item m-stack__item--middle m-brand__logo">
+								<a href="/home" class="m-brand__logo-wrapper"> </a>
+							</div>
+							<div class="m-stack__item m-stack__item--middle m-brand__tools">
+								<!-- BEGIN: Left Aside Minimize Toggle -->
+								<a href="javascript:;" id="m_aside_left_minimize_toggle"
+									class="m-brand__icon m-brand__toggler m-brand__toggler--left m--visible-desktop-inline-block ">
+									<span></span>
+								</a>
+								<!-- END -->
+								<!-- BEGIN: Responsive Aside Left Menu Toggler -->
+								<a href="javascript:;" id="m_aside_left_offcanvas_toggle"
+									class="m-brand__icon m-brand__toggler m-brand__toggler--left m--visible-tablet-and-mobile-inline-block">
+									<span></span>
+								</a>
+								<!-- END -->
+
+								<!-- BEGIN: Topbar Toggler -->
+								<a id="m_aside_header_topbar_mobile_toggle" href="javascript:;"
+									class="m-brand__icon m--visible-tablet-and-mobile-inline-block">
+									<i class="flaticon-more"></i>
+								</a>
+								<!-- BEGIN: Topbar Toggler -->
+							</div>
+						</div>
+					</div>
+					<!-- END: Brand -->
+					<div class="m-stack__item m-stack__item--fluid m-header-head"
+						id="m_header_nav">
+						<!-- BEGIN: Horizontal Menu -->
+						<button
+							class="m-aside-header-menu-mobile-close  m-aside-header-menu-mobile-close--skin-dark "
+							id="m_aside_header_menu_mobile_close_btn">
+							<i class="la la-close"></i>
+						</button>
+						<div id="m_header_menu"
+							class="m-header-menu m-aside-header-menu-mobile m-aside-header-menu-mobile--offcanvas  m-header-menu--skin-light m-header-menu--submenu-skin-light m-aside-header-menu-mobile--skin-dark m-aside-header-menu-mobile--submenu-skin-dark "
+							style="vertical-align: middle; display: none;"></div>
+						<!-- END: Horizontal Menu -->
+						<!-- BEGIN: Topbar -->
+						<div id="m_header_topbar"
+							class="m-topbar  m-stack m-stack--ver m-stack--general">
+							<div id="m_header_topbar_item"></div>
+							<div class="m-stack__item m-topbar__nav-wrapper">
+								<ul class="m-topbar__nav m-nav m-nav--inline">
+
+									<li
+										class="m-nav__item m-topbar__user-profile m-topbar__user-profile--img m-dropdown m-dropdown--medium m-dropdown--arrow m-dropdown--header-bg-fill m-dropdown--align-right m-dropdown--mobile-full-width m-dropdown--skin-light"
+										m-dropdown-toggle="click" aria-expanded="true"><a
+										href="#" class="m-nav__link m-dropdown__toggle"> <span
+											class="m-topbar__username"> <img alt="user_logo"
+												th:src="@{/resources/images/ba-header/ic_user.png}"><span
+												class="lblUserName" style="margin: 0 10px;"
+												th:text="${#authentication.getPrincipal().displayName}">
+											</span> <span class="d-none" id="role"
+												th:text="${#authentication.authorities}"> </span>
+										</span> <span class="m-topbar__userpic"> <img alt="arr_down"
+												th:src="@{/resources/images/ba-header/ic_down.png}">
+										</span>
+									</a>
+										<div class="m-dropdown__wrapper">
+
+											<div class="m-dropdown__inner">
+												<div class="m-dropdown__header m--align-center">
+													<div class="m-card-user m-card-user--skin-dark">
+														<div class="m-card-user__pic"></div>
+														<div class="m-card-user__details">
+															<span class="m-card-user__name m--font-weight-500"
+																th:text="${#authentication.getPrincipal().displayName}">
+															</span> <a href=""
+																class="m-card-user__email m--font-weight-300 m-link">
+															</a>
+														</div>
+													</div>
+												</div>
+												<div class="m-dropdown__body">
+													<div class="m-dropdown__content">
+														<ul class="m-nav m-nav--skin-light">
+
+															<li class="m-nav__separator m-nav__separator--fit"></li>
+															<li class="m-nav__item"><div class="row">
+																	<a href="/logout"
+																		class="btn m-btn--pill    btn-secondary m-btn m-btn--custom m-btn--label-brand m-btn--bolder">
+																		Logout </a>
+																	<button
+																		class="btn m-btn--pill    btn-secondary m-btn m-btn--custom m-btn--label-brand m-btn--bolder"
+																		data-toggle="modal"
+																		data-target="#modal-update-profile">Chỉnh sửa
+																		thông tin cá nhân</button>
+																</div></li>
+														</ul>
+													</div>
+												</div>
+											</div>
+										</div></li>
+								</ul>
+							</div>
+						</div>
+						<!-- END: Topbar -->
+					</div>
+				</div>
+			</div>
+		</header>
+		<!-- END: Header -->
+		<!-- begin::Body -->
+		<div
+			class="m-grid__item m-grid__item--fluid m-grid m-grid--ver-desktop m-grid--desktop m-body">
+			<!-- BEGIN: Left Aside -->
+			<button class="m-aside-left-close  m-aside-left-close--skin-dark "
+				id="m_aside_left_close_btn">
+				<i class="la la-close"></i>
+			</button>
+			<div id="m_aside_left"
+				class="m-grid__item	m-aside-left  m-aside-left--skin-dark ">
+				<!-- BEGIN: Aside Menu -->
+				<div id="m_ver_menu"
+					class="m-aside-menu  m-aside-menu--skin-dark m-aside-menu--submenu-skin-dark "
+					data-menu-vertical="true" data-menu-scrollable="false"
+					data-menu-dropdown-timeout="500">
+
+					<ul class="m-menu__nav  m-menu__nav--dropdown-submenu-arrow ">
+						<li class="m-menu__item  m-menu__item--submenu"
+							aria-haspopup="true" data-menu-submenu-toggle="hover"><a
+							th:href="@{/}" class="m-menu__link m-menu__toggle"> <i
+								class="m-menu__link-icon flaticon-line-graph"></i> <span
+								class="m-menu__link-text">Tổng quan</span>
+						</a></li>
+						<li class="m-menu__section">
+							<h4 class="m-menu__section-text">Tính năng</h4> <i
+							class="m-menu__section-icon		flaticon-more-v3"></i>
+						</li>
+						<li class="m-menu__item  m-menu__item--submenu"
+							sec:authorize="hasRole('SYS_ADMIN')" aria-haspopup="true"
+							data-menu-submenu-toggle="hover"><a th:href="@{/admin}"
+							class="m-menu__link m-menu__toggle"> <i
+								class="m-menu__link-icon flaticon-users"></i> <span
+								class="m-menu__link-text">Quản lý tại khoản</span>
+						</a></li>
+						<li class="m-menu__item  m-menu__item--submenu"
+							sec:authorize="hasAnyRole('SYS_ADMIN','ADMIN','TECHNICIAN')"
+							aria-haspopup="true" data-menu-submenu-toggle="hover"><a
+							th:href="@{/keywords}" class="m-menu__link m-menu__toggle"> <i
+								class="m-menu__link-icon flaticon-comment"></i> <span
+								class="m-menu__link-text">Quản lý từ khóa</span>
+						</a></li>
+						<li class="m-menu__item m-menu__item--submenu m-menu__item--hover"
+							aria-haspopup="true" data-menu-submenu-toggle="hover"><a
+							href="javascript:;" class="m-menu__link m-menu__toggle"> <i
+								class="m-menu__link-icon flaticon-list"></i> <span
+								class="m-menu__link-text">Quản lý báo giá </span> <i
+								class="m-menu__ver-arrow la la-angle-right"></i></a>
+							<div class="m-menu__submenu">
+								<span class="m-menu__arrow"></span>
+								<ul class="m-menu__subnav">
+									<li class="m-menu__item  m-menu__item--parent"
+										aria-haspopup="true"><span class="m-menu__link"><span
+											class="m-menu__link-text">Quản lý báo giá </span></span></li>
+									<li class="m-menu__item " aria-haspopup="true"><a
+										th:href="@{/quotation/step-1}" class="m-menu__link "><i
+											class="m-menu__link-bullet m-menu__link-bullet--dot"><span></span></i><span
+											class="m-menu__link-text">Tạo báo giá </span></a></li>
+
+									<li class="m-menu__item " aria-haspopup="true"><a
+										th:href="@{/quotation/my-quotations}" class="m-menu__link "><i
+											class="m-menu__link-bullet m-menu__link-bullet--dot"><span></span></i><span
+											class="m-menu__link-text">Báo giá của tôi </span></a></li>
+
+									<li class="m-menu__item " aria-haspopup="true"><a
+										th:href="@{/quotation/approval-quotations}"
+										class="m-menu__link "><i
+											class="m-menu__link-bullet m-menu__link-bullet--dot"><span></span></i><span
+											class="m-menu__link-text">Yêu cầu duyệt báo giá </span></a></li>
+								</ul>
+							</div></li>
+					</ul>
+				</div>
+				<!-- END: Aside Menu -->
+			</div>
+			<!-- END: Left Aside -->
+			<div class="m-grid__item m-grid__item--fluid m-wrapper">
+				<div class="m-content" layout:fragment="content"></div>
+			</div>
+
+			<div class="modal fade" id="modal-update-profile" tabindex="-1"
+				role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="exampleModalLabel">Sửa thông tin
+								cá nhân:</h5>
+							<button type="button" class="close" data-dismiss="modal"
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body">
+							<form class="m-form m-form--fit m-form--label-align-right">
+								<div class="m-portlet__body">
+									<div class="form-group m-form__group" id="parentNameDiv">
+										<label for="userLogin">User login</label><input type="text"
+											class="form-control m-input m-input--air" disabled
+											id="userLogin"
+											th:value="${#authentication.getPrincipal().username}"
+											name="userLogin" />
+									</div>
+									<div class="form-group m-form__group">
+										<label for="displayName">Họ tên</label> <input type="text"
+											class="form-control m-input m-input--air" id="displayName"
+											name="displayName"
+											th:value="${#authentication.getPrincipal().displayName}"
+											placeholder="Tên đầy đủ">
+									</div>
+									<div class="form-group m-form__group">
+										<label for="description">Số điện thoại</label> <input
+											type="text" class="form-control m-input m-input--air"
+											id="userPhone"
+											th:value="${#authentication.getPrincipal().userPhone}"
+											name="userPhone">
+									</div>
+								</div>
+								<div class="m-portlet__foot m-portlet__foot--fit">
+									<div class="m-form__actions">
+										<a class="btn btn-accent" onclick="updateProfile()">Lưu
+											lại</a>
+										<button type="reset" class="btn btn-secondary"
+											data-dismiss="modal">Hủy</button>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<footer class="m-grid__item		m-footer ">
+			<div
+				class="m-container m-container--fluid m-container--full-height m-page__container">
+				<div
+					class="m-stack m-stack--flex-tablet-and-mobile m-stack--ver m-stack--desktop">
+					<div
+						class="m-stack__item m-stack__item--left m-stack__item--middle m-stack__item--last">
+						<span class="m-footer__copyright"> </span>
+					</div>
+					<div
+						class="m-stack__item m-stack__item--right m-stack__item--middle m-stack__item--first">
+						<span class="m-footer__copyright" style="color: #999999"> </span>
+
+					</div>
+				</div>
+			</div>
+		</footer>
+		<!-- end::Quick Sidebar -->
+		<!-- begin::Scroll Top -->
+		<div class="m-scroll-top m-scroll-top--skin-top"
+			data-toggle="m-scroll-top" data-scroll-offset="500"
+			data-scroll-speed="300">
+			<i class="la la-arrow-up"></i>
+		</div>
+		<!-- end::Scroll Top -->
+		<!-- begin::Quick Nav -->
+
+		<!-- begin::Quick Nav -->
+		<!--begin::Base Scripts -->
+		<script
+			th:src="@{/resources/theme/metronic5/assets/vendors/base/vendors.bundle.js}"
+			type="text/javascript"></script>
+		<script
+			th:src="@{/resources/theme/metronic5/assets/js/scripts.bundle.js}"
+			type="text/javascript"></script>
+			
+		<script
+			th:src="@{/resources/theme/metronic5/assets/js/datatables.bundle.js}"
+			type="text/javascript"></script>
+		<!-- <script
+			th:src="@{/resources/theme/metronic5/assets/javascript/scripts.core.js}"
+			type="text/javascript"></script>
+		<script
+			th:src="@{/resources/theme/metronic5/assets/javascript/scripts.custom.js}"
+			type="text/javascript"></script> -->
+		<!--end::Base Scripts -->
+		<!--begin::Page Vendors -->
+		<!--end::Page Vendors -->
+		<!--begin::Page Snippets -->
+
+		<script type="text/javascript">
+			$(function() {
+				setNavigation();
+			});
+
+			function setNavigation() {
+				var path = window.location.pathname;
+				path = path.replace(/\/$/, "");
+				path = decodeURIComponent(path);
+
+				$(".m-menu__item a")
+						.each(
+								function() {
+									var href = $(this).attr('href');
+									if (href.indexOf(path) != -1) {
+										//$(this).closest('li').addClass('m-menu/*  */__item--active');
+										$(this)
+												.closest('li')
+												.closest('ul')
+												.closest('li')
+												.addClass(
+														'm-menu__item--open m-menu__item--expanded');
+									}
+								});
+			}
+
+			function updateProfile() {
+				var user = {};
+				user.userLogin = $("#userLogin").val();
+				user.displayName = $("#displayName").val();
+				user.userPhone = $("#userPhone").val();
+
+				$.ajax(
+						{
+							beforeSend : function(xhr, options) {
+								xhr.setRequestHeader("X-CSRF-TOKEN",
+										'[[${ _csrf.token }]]');
+								xhr.setRequestHeader("content-type",
+										"application/json; charset=utf-8");
+							},
+							type : 'PUT',
+							url : "/user/profile",
+							data : JSON.stringify(user)
+						}).done(function(result) {
+					location.reload();
+				}).fail(function(err) {
+					location.reload();
+				});
+			}
+		</script>
+	</div>
+</body>
+<script type="text/javascript" layout:fragment="script-include">
+	
+</script>
+<script type="text/javascript" layout:fragment="script">
+	
+</script>
+
+<th:block layout:fragment="script-block"></th:block>
+
+</html>
+

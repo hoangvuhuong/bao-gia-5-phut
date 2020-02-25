@@ -1,0 +1,160 @@
+body {
+    font-family: "Open Sans";
+    font-size: 13px;
+}
+
+@page {
+    margin-top: 1cm;
+    margin-left: 1cm;
+    margin-right: 1cm;
+    margin-bottom: 1cm;
+
+    size: A4 landscape;
+}
+
+#pagenumber:before {
+    content: counter(page);
+}
+
+#pagecount:before {
+    content: counter(pages);
+}
+
+.logo-container {
+    text-align: right;
+}
+
+.page-count {
+    text-align: right;
+}
+
+.logo {
+    width: 275px;
+}
+
+.image-two {
+    width: 500px;
+}
+
+.services {
+	width: 1024px;
+}
+
+h1 {
+    font-size: 18px;
+    margin-bottom: 15px;
+    margin-top: 15px;
+}
+
+h1.center {
+	text-align: center;
+}
+
+p {
+    font-size: 12px;
+}
+
+.footer {
+    text-align: center;
+}
+
+@font-face {
+    font-family: "Bar-Code 39";
+    src: url(Code39.ttf) format('truetype');
+}
+
+.barcode {
+    font-family: "Bar-Code 39";
+    font-size: 26px;
+}
+
+.right {
+    text-align: right;
+}
+
+.left {
+    text-align: left;
+}
+
+.bottom {
+    vertical-align: bottom;
+}
+
+.contact-block {
+    height: 68px;
+}
+
+.plantable-block {
+    align-items: center;
+}
+
+table {
+    width: 100%;
+}
+
+table.planTable {
+  border: 1px solid #1C6EA4;
+  width: 100%;
+  text-align: center;
+  border-collapse: collapse;
+}
+
+table.feeTable {
+  border: 1px solid #1C6EA4;
+  background-color: #FFFFFF;
+  width: 100%;
+  text-align: center;
+  border-collapse: collapse;
+}
+table.feeTable td, table.feeTable th {
+  border: 1px solid #AAAAAA;
+  padding: 3px 2px;
+}
+table.feeTable tbody td {
+  font-size: 13px;
+}
+table.feeTable tbody td.left {
+  text-align: left;
+}
+table.feeTable tr.title {
+  background: #D0E4F5;
+  font-weight: bold;
+}
+
+table.planTable td, table.planTable th {
+  border: 1px solid #AAAAAA;
+}
+table.planTable tbody td {
+  font-size: 13px;
+}
+
+table.planTable tbody td.bold {
+  font-weight: bold;
+}
+
+table.planTable tbody td.right {
+  text-align: right;
+}
+
+table.planTable tbody td.right.bold {
+  font-weight: bold;
+}
+
+table.planTable tbody td.bold.bkgYellow {
+  background-color: #FFE598;
+  font-weight: bold;
+}
+
+hr {
+    background-color: #000000;
+    border: dashed #000000 0.5px;
+    height: 1px;
+}
+
+.page-break {
+    page-break-after: always;
+}
+
+.next-page {
+    page-break-before: always
+}

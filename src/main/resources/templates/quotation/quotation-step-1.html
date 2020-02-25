@@ -1,0 +1,2207 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" lang="vi"
+	layout:decorate="~{layout/master}">
+
+<head>
+<title>Tạo báo giá bước 1</title>
+
+<style type="text/css">
+.highlight {
+	font-weight: bold;
+	font-size: larger;
+	color: blue !important;
+}
+
+td {
+	vertical-align: top !important;
+}
+
+table {
+	margin: 0 auto;
+}
+
+.progress-bar {
+	height: 100% !important;
+}
+</style>
+</head>
+
+<body>
+	<!-- /* Content of this page will be decorated by the elements of layout.html (task/layout) */ -->
+	<div layout:fragment="content">
+		<div class="m-portlet m-portlet--full-height">
+
+			<!--begin: Portlet Head-->
+			<div class="m-portlet__head">
+				<div class="m-portlet__head-caption">
+					<div class="m-portlet__head-title">
+						<h3 class="m-portlet__head-text">Tạo báo giá</h3>
+					</div>
+				</div>
+				<div class="m-portlet__head-tools">
+					<ul class="m-portlet__nav">
+						<li class="m-portlet__nav-item"><a href="#"
+							data-toggle="m-tooltip"
+							class="m-portlet__nav-link m-portlet__nav-link--icon"
+							data-direction="left" data-width="auto" title=""
+							data-original-title="Get help with filling up this form"> <i
+								class="flaticon-info m--icon-font-size-lg3"></i>
+						</a></li>
+					</ul>
+				</div>
+			</div>
+
+			<!--end: Portlet Head-->
+
+			<!--begin: Form Wizard-->
+			<div
+				class="m-wizard m-wizard--2 m-wizard--success m-wizard--step-between"
+				id="m_wizard">
+
+				<!--begin: Message container -->
+				<div class="m-portlet__padding-x">
+
+					<!-- Here you can put a message or alert -->
+				</div>
+
+				<!--end: Message container -->
+
+				<!--begin: Form Wizard Head -->
+				<div class="m-wizard__head m-portlet__padding-x">
+
+					<!--begin: Form Wizard Progress -->
+					<div class="m-wizard__progress">
+						<div class="progress">
+							<div class="progress-bar" role="progressbar" aria-valuenow="100"
+								aria-valuemin="0" aria-valuemax="100"
+								style="width: 0%; height: 50%;"></div>
+						</div>
+					</div>
+
+					<!--end: Form Wizard Progress -->
+
+					<!--begin: Form Wizard Nav -->
+					<div class="m-wizard__nav">
+						<div class="m-wizard__steps">
+							<div class="m-wizard__step m-wizard__step--done"
+								m-wizard-target="m_wizard_form_step_1">
+								<a href="#" class="m-wizard__step-number"> <span><i
+										class="fa  flaticon-placeholder"></i></span>
+								</a>
+								<div class="m-wizard__step-info">
+									<div class="m-wizard__step-title">1. Chọn từ khóa</div>
+								</div>
+							</div>
+							<div class="m-wizard__step m-wizard__step--current"
+								m-wizard-target="m_wizard_form_step_2">
+								<a href="#" class="m-wizard__step-number"> <span><i
+										class="fa  flaticon-layers"></i></span>
+								</a>
+								<div class="m-wizard__step-info">
+									<div class="m-wizard__step-title">2. Tạo báo giá</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!--end: Form Wizard Nav -->
+				</div>
+
+				<!--end: Form Wizard Head -->
+
+				<!--begin: Form Wizard Form-->
+				<div class="m-wizard__form">
+
+					<!--
+                1) Use m-form--label-align-left class to alight the form input lables to the right
+                2) Use m-form--state class to highlight input control borders on form validation
+                -->
+					<form class="m-form m-form--label-align-left- m-form--state-"
+						id="m_form" novalidate="novalidate">
+
+						<!--begin: Form Body -->
+						<div class="m-portlet__body">
+
+							<!--begin: Form Wizard Step 1-->
+							<div class="m-wizard__form-step " id="m_wizard_form_step_1">
+								<div class="row">
+
+									<div class="col-xl-10 offset-lg-1">
+										<div class="row">
+											<div class="col-lg-6">
+												<!--begin::Portlet-->
+												<div class="m-portlet m-portlet--bordered m-portlet--unair"
+													style="height: 700px; overflow-y: auto;">
+													<div class="m-portlet__head">
+														<div class="m-portlet__head-caption">
+															<div class="m-portlet__head-title">
+																<h3 class="m-portlet__head-text">Danh mục</h3>
+															</div>
+														</div>
+													</div>
+													<div class="m-portlet__body">
+														<div class="row">
+															<div class="input-group col-lg-9 col-md-9 col-sm-12 pb-4">
+																<input type="text"
+																	class="form-control kt-quick-search__input"
+																	id="searchCategory" placeholder="Tìm kiếm...">
+																<a id="btnSearchCategory" class="btn btn-secondary">
+																	<i class="flaticon-search-1"></i>
+																</a>
+															</div>
+														</div>
+
+														<div id="m_tree_6" class="tree-demo"></div>
+													</div>
+												</div>
+
+												<!--end::Portlet-->
+											</div>
+											<div class="col-lg-6">
+
+												<!--begin::Portlet-->
+												<div class="m-portlet m-portlet--bordered m-portlet--unair"
+													style="height: 700px; overflow-y: auto;">
+													<div class="m-portlet__head">
+														<div class="m-portlet__head-caption">
+															<div class="m-portlet__head-title">
+																<span class="m-portlet__head-icon"> <i
+																	class="flaticon-search"></i>
+																</span>
+																<h3 class="m-portlet__head-text">Từ khóa đã chọn</h3>
+															</div>
+														</div>
+														<div class="m-portlet__head-tools">
+															<ul class="m-portlet__nav">
+																<li class="m-portlet__nav-item"><a href="#"
+																	onclick="showKeywords()"
+																	class="m-portlet__nav-link btn btn-light m-btn m-btn--pill m-btn--air btn-outline-info"
+																	data-toggle="modal"
+																	data-target="#modal-keydetails-view"> Từ khóa đã
+																		chọn </a></li>
+															</ul>
+														</div>
+													</div>
+													<div class="m-portlet__body">
+														<div class="m-checkbox-list" id="keyword-group-key"></div>
+													</div>
+												</div>
+											</div>
+											<div class="modal fade" id="modal-keydetails-view"
+												tabindex="-1" role="dialog"
+												aria-labelledby="exampleModalLabel" aria-hidden="true">
+												<div class="modal-dialog" role="document">
+													<div class="modal-content">
+														<div class="modal-header">
+															<h5 class="modal-title" id="exampleModalLabel">Danh
+																sách từ khóa</h5>
+															<button type="button" class="close" data-dismiss="modal"
+																aria-label="Close">
+																<span aria-hidden="true">&times;</span>
+															</button>
+														</div>
+														<div class="modal-body">
+															<div class="form-group m-form__group">
+																<p>
+																	Tổng số từ đã chọn: <b id="numOfKeyword"></b>
+																</p>
+															</div>
+															<div class="form-group m-form__group">
+																<textarea class="form-control m-input"
+																	id="keyworld-list" rows="18"></textarea>
+															</div>
+														</div>
+														<div class="modal-footer">
+															<button type="button" class="btn btn-secondary"
+																data-dismiss="modal">Đóng</button>
+															<button type="button" class="btn btn-primary"
+																onclick="copyKeywords()">Sao chép & Đóng</button>
+														</div>
+													</div>
+												</div>
+											</div>
+											<!--end::Portlet-->
+										</div>
+									</div>
+
+								</div>
+							</div>
+
+							<!--end: Form Wizard Step 1-->
+
+							<!--begin: Form Wizard Step 2-->
+							<div class="m-wizard__form-step m-wizard__form-step--current"
+								id="m_wizard_form_step_2">
+								<div class="row">
+									<div class="col-xl-10 offset-lg-1">
+										<div class="row">
+											<div class="col-lg-12">
+												<div class="m-portlet m-portlet--bordered m-portlet--unair">
+													<div class="m-portlet__head">
+														<div class="m-portlet__head-caption">
+															<div class="m-portlet__head-title">
+																<h3 class="m-portlet__head-text">Thông tin báo giá</h3>
+
+															</div>
+														</div>
+													</div>
+
+
+
+													<!--begin::Form-->
+													<div class="m-form m-form--fit m-form--label-align-right"
+														id="m_form_1">
+														<div class="m-portlet__body">
+															<div class="m-form__content">
+																<div
+																	class="m-alert m-alert--icon alert alert-danger m--hide"
+																	role="alert" id="m_form_1_msg">
+																	<div class="m-alert__icon">
+																		<i class="la la-warning"></i>
+																	</div>
+																	<div class="m-alert__text" id="form_error_msg">Oh
+																		snap! Change a few things up and try submitting again.</div>
+																	<div class="m-alert__close">
+																		<button type="button" class="close" data-close="alert"
+																			aria-label="Close"></button>
+																	</div>
+																</div>
+															</div>
+
+															<div class="form-group m-form__group row"
+																th:if="${quotation.status=='REJECTED'}">
+																<label class="col-form-label col-lg-3 col-sm-12"
+																	style="color: red;"> Lý do từ chối</label>
+																<div class="col-lg-4 col-md-9 col-sm-12">
+																	<div class="input-group">
+																		<textarea class="form-control m-input"
+																			th:text="${quotation.note}" disabled
+																			style="color: red;"></textarea>
+																	</div>
+																</div>
+															</div>
+
+															<div class="form-group m-form__group row d-none">
+																<label class="col-form-label col-lg-3 col-sm-12">
+																	ID báo giá</label>
+																<div class="col-lg-4 col-md-9 col-sm-12">
+																	<div class="input-group">
+																		<input type="text" class="form-control m-input"
+																			id="quotationId" name="quotationId"
+																			th:value="${quotation.quotationId}">
+																	</div>
+																</div>
+															</div>
+
+
+															<!-- <div class="form-group m-form__group row">
+																<label class="col-form-label col-lg-3 col-sm-12">Link
+																	báo giá google sheet *</label>
+																<div class="col-lg-4 col-md-9 col-sm-12">
+																	<div class="input-group">
+																		<input type="text" class="form-control m-input"
+																			id="googleSheetLink" name="googleSheetLink"
+																			placeholder="Link báo giá"
+																			th:value="${quotation.googleSheetLink}">
+																	</div>
+																	<span class="m-form__help">Nhập vào link google
+																		sheet báo giá.</span>
+																</div>
+															</div> -->
+
+															<div class="form-group m-form__group row">
+																<label class="col-form-label col-lg-3 col-sm-12">Người
+																	phê duyệt *</label>
+																<div class="col-lg-4 col-md-9 col-sm-12">
+																	<select class="form-control m-input m-input--square"
+																		name="approver_email" id="approver_email">
+																		<option value="other">Other</option>
+																		<option th:each="email : ${emailSuggest}"
+																			th:value="${email.email}" th:utext="${email.email}"
+																			th:selected="${quotation.approver==email.email}" />
+																	</select> <br>
+																	<div class="d-none" id="otherApprover">
+																		<input class="form-control m-input" type="text"
+																			id="approver" name="approver"
+																			th:value="${quotation.approver}"
+																			placeholder="Nhập email khác">
+																	</div>
+																	<span class="m-form__help">Báo giá mặc định sẽ
+																		được phê duyệt bởi:</span>
+																	<th:block th:each="email : ${emailApprover}">
+																		<br>
+																		<span class="m-form__help">[[${email}]]</span>
+																	</th:block>
+																</div>
+															</div>
+
+															<div class="form-group m-form__group row">
+																<label class="col-form-label col-lg-3 col-sm-12">Thời
+																	hạn phê duyệt *</label>
+																<div class="col-lg-4 col-md-9 col-sm-12">
+																	<div class="input-group">
+																		<input class="form-control m-input" type="date"
+																			id="dueDate"
+																			th:value="${#dates.format(quotation.dueDate, 'yyyy-MM-dd')}">
+																	</div>
+																</div>
+															</div>
+															<div class="form-group m-form__group row">
+																<label class="col-form-label col-lg-3 col-sm-12">ID
+																	Khách hàng(Lead Marketing) *</label>
+																<div class="col-lg-4 col-md-9 col-sm-12">
+																	<div class="input-group">
+																		<input type="text" class="form-control m-input"
+																			id="partnerId" name="partnerId"
+																			th:value="${quotation.partnerId}"
+																			placeholder="ID khách hàng">
+																	</div>
+																	<span class="m-form__help">Từ Lead Marketing: mã
+																		của Mar ví dụ: HCMV122. Nếu là Khách trực tiếp ghi:
+																		"Trực tiếp" để đo hiệu quả MarketingYour answer</span>
+																</div>
+															</div>
+															<div class="form-group m-form__group row">
+																<label class="col-form-label col-lg-3 col-sm-12">Đơn
+																	vị *</label>
+																<div class="col-lg-4 col-md-9 col-sm-12">
+																	<div class="input-group">
+																		<input type="text" class="form-control m-input"
+																			th:value="${quotation.partnerName}" id="partner"
+																			name="partner" placeholder="Google">
+																	</div>
+																	<span class="m-form__help">Tên đơn vị</span>
+																</div>
+															</div>
+
+															<div class="form-group m-form__group row">
+																<label class="col-form-label col-lg-3 col-sm-12">Website
+																	*</label>
+																<div class="col-lg-4 col-md-9 col-sm-12">
+																	<div class="input-group">
+																		<input type="text" class="form-control m-input"
+																			th:value="${quotation.partnerWebsite}" id="url"
+																			name="url" placeholder="http://adsplus.vn">
+																	</div>
+																	<span class="m-form__help">Nhập vào địa chỉ
+																		website khách hàng.</span>
+																</div>
+															</div>
+
+															<div class="form-group m-form__group row">
+																<label class="col-form-label col-lg-3 col-sm-12">Sản
+																	phẩm/ dịch vụ CHÍNH quảng cáo *</label>
+																<div class="col-lg-4 col-md-9 col-sm-12">
+																	<div class="input-group">
+																		<input type="text" class="form-control m-input"
+																			th:value="${quotation.mainProductService}"
+																			id="mainProductService" name="mainProductService"
+																			placeholder="http://adsplus.vn">
+																	</div>
+																	<span class="m-form__help">Website có thể có
+																		nhiều sản phẩm và nhiều dịch vụ. Kinh doanh nên hỏi
+																		khách hàng muốn tập trung vào sản phẩm và dịch vụ nào
+																		để tránh bị báo giá quá nhiều từ khóa gây mất thời
+																		gian và không đúng sản phẩm khách hàng mong muốn. VÍ
+																		DỤ: sản phẩm quần áo trẻ em từ 03-06 tuổi, khách hàng
+																		của tôi tập trung quận 1/hồ chí minh</span>
+																</div>
+															</div>
+
+															<!-- <div class="form-group m-form__group row">
+																<label class="col-form-label col-lg-3 col-sm-12">Khu
+																	vực địa lý xuất hiện quảng cáo *</label>
+																<div class="col-lg-4 col-md-9 col-sm-12">
+																	<div class="input-group">
+																		<input type="text" class="form-control m-input"
+																			id="geoArea" name="geoArea"
+																			th:value="${quotation.geoArea}"
+																			placeholder="Khu vực địa lý">
+																	</div>
+
+																	<span class="m-form__help">Nếu ngân sách nhỏ,
+																		kinh doanh nên khuyên khách hàng nên tập trung quảng
+																		cáo chỉ 1 vài tỉnh thành. Không nên báo giá toàn quốc.</span>
+																</div>
+
+															</div> -->
+															<div class="form-group m-form__group row">
+																<label class="col-form-label col-lg-3 col-sm-12">Khu
+																	vực địa lý xuất hiện quảng cáo *</label>
+																<div class="col-lg-4 col-md-9 col-sm-12">
+																	<select class="form-control m-select2" id="m_select2_3"
+																		name="geoArea" multiple="multiple"
+																		style="width: 100%;">
+																		<option th:each="geoarea : ${geoareas}"
+																			th:value="${geoarea.criteriaId}"
+																			th:utext="${geoarea.canonicalName}"
+																			th:selected="${#strings.contains(quotation.geoArea, geoarea.criteriaId)}" />
+																	</select> <span class="m-form__help">Nếu ngân sách nhỏ,
+																		kinh doanh nên khuyên khách hàng nên tập trung quảng
+																		cáo chỉ 1 vài tỉnh thành. Không nên báo giá toàn quốc.</span>
+																</div>
+															</div>
+															<div class="form-group m-form__group row">
+																<label class="col-form-label col-lg-3 col-sm-12">Ngân
+																	sách dự kiến chạy quảng cáo *</label>
+																<div class="col-lg-4 col-md-9 col-sm-12">
+																	<div class="input-group">
+																		<input type="text" class="form-control m-input"
+																			id="expectedBudget" name="expectedBudget"
+																			th:value="${quotation.expectedBudget}"
+																			placeholder="Ngận sách dự kiến">
+																	</div>
+																	<span class="m-form__help">Ghi rõ ngân sách /
+																		ngày hoặc tuần hoặc tháng.</span>
+																</div>
+															</div>
+
+															<div class="form-group m-form__group row">
+																<label class="col-form-label col-lg-3 col-sm-12">Bộ
+																	từ khóa gợi ý của khách: (nếu có)</label>
+																<div class="col-lg-4 col-md-9 col-sm-12">
+																	<div class="input-group">
+																		<textarea rows="3" id="suggestionKeywords"
+																			th:text="${quotation.suggestionKeywords}"
+																			class="form-control" placeholder="Keyword"></textarea>
+																	</div>
+																	<span class="m-form__help">Ghi rõ ngân sách /
+																		ngày hoặc tuần hoặc tháng.</span>
+																	<!-- <input type="button" onclick="javascript:generateTable()" value="Genereate Table" id="btnGenereateTable"/> -->
+																</div>
+
+															</div>
+															<!-- <div class="form-group m-form__group row">
+																<label class="col-form-label col-lg-3 col-sm-12">Max
+																	CPC *</label>
+																<div class="col-lg-4 col-md-9 col-sm-12">
+																	<div class="input-group">
+																		<input type="number" class="form-control m-input"
+																			id="maxCpc" name="maxCpc" placeholder="maxCPC">
+																		<button type="button"
+																			class="btn btn-primary m-btn m-btn--custom m-btn--icon"
+																			onclick="getKeywordInfo();">
+																			<span> <i class="la la-check"></i>&nbsp;&nbsp;
+																				<span>Lấy chỉ số</span>
+																			</span>
+																		</button>
+																	</div>
+																	<span class="m-form__help">Ghi rõ MaxCpc.</span>
+																</div>
+																<div class="col-lg-1 col-md-1 col-sm-12">
+																	<img id="loader" class="d-none"
+																		th:src="@{/resources/images/ajax-loader.gif}" />
+																</div>
+															</div> -->
+															<div class="form-group m-form__group row">
+																<label class="col-form-label col-lg-3 col-sm-12">Có
+																	VAT không *</label>
+																<div class="col-lg-4 col-md-9 col-sm-12">
+																	<div class="m-radio-inline">
+																		<label class="m-radio"> <input type="radio"
+																			th:checked="${quotation.vat=='YES'}" name="vat"
+																			value="YES"> Có <span></span>
+																		</label> <label class="m-radio"> <input type="radio"
+																			th:checked="${quotation.vat=='NO'}" name="vat"
+																			value="NO" checked> Không <span></span>
+																		</label>
+																	</div>
+																</div>
+															</div>
+															<div class="form-group m-form__group row">
+																<label class="col-form-label col-lg-3 col-sm-12">Website
+																	đã từng quảng cáo Adwords *</label>
+																<div class="col-lg-4 col-md-9 col-sm-12">
+																	<div class="m-radio-inline">
+																		<label class="m-radio"> <input type="radio"
+																			th:checked="${quotation.usedToAdvertise=='YES'}"
+																			name="usedToAdvertise" value="YES"> Đã từng <span></span>
+																		</label> <label class="m-radio"> <input type="radio"
+																			th:checked="${quotation.usedToAdvertise=='NO'}"
+																			name="usedToAdvertise" value="NO" checked>
+																			Chưa từng <span></span>
+																		</label>
+																	</div>
+																</div>
+															</div>
+															<div class="d-none" id="more-info">
+																<p style="text-align: center">VUI LÒNG CUNG CẤP THÊM
+																	1 SỐ THÔNG TIN CHI TIẾT</p>
+
+																<div class="form-group m-form__group row">
+																	<label class="col-form-label col-lg-3 col-sm-12">Đã
+																		từng hợp tác với đối tác nào hoặc tự chạy? (nếu có)</label>
+																	<div class="col-lg-4 col-md-9 col-sm-12">
+																		<div class="input-group">
+																			<input type="text" class="form-control m-input"
+																				th:value="${quotation.previousPartner}"
+																				id="previousPartner" name="previousPartner">
+																		</div>
+																	</div>
+																</div>
+
+																<div class="form-group m-form__group row">
+																	<label class="col-form-label col-lg-3 col-sm-12">Lý
+																		do không tiếp tục chạy quảng cáo với đối tác cũ hoặc
+																		tự chạy: (nếu có)</label>
+																	<div class="col-lg-4 col-md-9 col-sm-12">
+																		<div class="input-group">
+																			<input type="text" class="form-control m-input"
+																				th:value="${quotation.quitReason}" id="quitReason"
+																				name="quitReason">
+																		</div>
+																	</div>
+																</div>
+
+																<div class="form-group m-form__group row">
+																	<label class="col-form-label col-lg-3 col-sm-12">Ngân
+																		sách đã từng chạy quảng cáo với đối tác khác hoặc tự
+																		chạy: (nếu có)</label>
+																	<div class="col-lg-4 col-md-9 col-sm-12">
+																		<div class="input-group">
+																			<input type="text" class="form-control m-input"
+																				th:value="${quotation.previousBudget}"
+																				id="previousBudget" name="previousBudget">
+																		</div>
+																	</div>
+																</div>
+															</div>
+															<!-- <div id="keywordInfo">
+																<p style="text-align: center">Từ khóa và các chỉ số</p>
+																<div class="form-group m-form__group row">
+																	<label class="col-form-label col-lg-3 col-sm-12">averageCpc:</label>
+																	<div class="col-lg-4 col-md-9 col-sm-12">
+																		<div class="input-group">
+																			<input type="text" class="form-control m-input"
+																				id="averageCpc" name="averageCpc"
+																				th:value="${quotation.averageCpc}" readonly>
+																		</div>
+																	</div>
+																</div>
+																<div class="form-group m-form__group row">
+																	<label class="col-form-label col-lg-3 col-sm-12">Clicks:</label>
+																	<div class="col-lg-4 col-md-9 col-sm-12">
+																		<div class="input-group">
+																			<input type="text" class="form-control m-input"
+																				id="clicks" name="clicks"
+																				th:value="${quotation.clicks}" readonly>
+																		</div>
+																	</div>
+																</div>
+
+																<div class="form-group m-form__group row">
+																	<label class="col-form-label col-lg-3 col-sm-12">Costs:</label>
+																	<div class="col-lg-4 col-md-9 col-sm-12">
+																		<div class="input-group">
+																			<input type="text" class="form-control m-input"
+																				id="costs" name="costs"
+																				th:value="${quotation.costs}" readonly>
+																		</div>
+																	</div>
+																</div>
+																<div class="form-group m-form__group row">
+																	<label class="col-form-label col-lg-3 col-sm-12">ctr:</label>
+																	<div class="col-lg-4 col-md-9 col-sm-12">
+																		<div class="input-group">
+																			<input type="text" class="form-control m-input"
+																				id="ctr" name="ctr" th:value="${quotation.ctr}"
+																				readonly>
+																		</div>
+																	</div>
+																</div>
+																<div class="form-group m-form__group row">
+																	<label class="col-form-label col-lg-3 col-sm-12">impressions:</label>
+																	<div class="col-lg-4 col-md-9 col-sm-12">
+																		<div class="input-group">
+																			<input type="text" class="form-control m-input"
+																				id="impressions" name="impressions"
+																				th:value="${quotation.impressions}" readonly>
+																		</div>
+																	</div>
+																</div>
+
+															</div> -->
+
+
+															<hr>
+															<div class="m-portlet__head">
+																<div class="m-portlet__head-caption">
+																	<div class="m-portlet__head-title">
+																		<button type="button" name="addplan" id="addplan"
+																			class="btn btn-outline-accent m-btn m-btn--custom m-btn--icon m-btn--outline-2x m-btn--pill m-btn--air">
+																			<span> <i class="fa fa-file-excel-o"></i> <i
+																				class="flaticon-add"></i> <span>Thêm kế hoạch</span>
+																			</span>
+																		</button>
+																	</div>
+																</div>
+
+															</div>
+															<div class="m-portlet__body">
+
+																<!--begin::Section-->
+																<div class="m-accordion m-accordion--default"
+																	id="m_accordion_1" role="tablist">
+
+																	<!--begin::Item-->
+																	<div class="m-accordion__item">
+																		<div class="m-accordion__item-head" role="tab"
+																			id="m_accordion_1_item_1_head" data-toggle="collapse"
+																			href="#m_accordion_1_item_1_body"
+																			aria-expanded="true">
+																			<span class="m-accordion__item-icon"><i
+																				class="fa flaticon-user-ok"></i></span> <span
+																				class="m-accordion__item-title">Kế hoạch 1</span> <span
+																				class="m-accordion__item-mode"></span>
+																		</div>
+																		<div class="m-accordion__item-body collapse show"
+																			id="m_accordion_1_item_1_body" role="tabpanel"
+																			aria-labelledby="m_accordion_1_item_1_head"
+																			data-parent="#m_accordion_1" style="">
+																			<div class="m-accordion__item-content">
+
+																				<div>
+																					<div class="row">
+																						<div class="col-md-2 col-lg-2 col-xs-1"></div>
+																						<div class="form-group m-form__group row">
+																							<label class="col-form-label col-lg-3 col-sm-12 ">Tên
+																								kế hoạch</label>
+																							<div class="col-lg-4 col-md-9 col-sm-12">
+																								<div class="input-group m-input-group">
+																									<input type="text" class="form-control m-input"
+																										id="plan1" name="plan1"
+																										placeholder="Name of plan">
+																								</div>
+																							</div>
+																							<button type="button" name="addAdsType1"
+																								id="addAdsType1"
+																								class="btn btn-outline-accent m-btn m-btn--custom m-btn--icon m-btn--outline-2x m-btn--pill m-btn--air btn_add_type">
+																								<span> <i class="fa fa-file-excel-o"></i>
+																									<i class="flaticon-add"></i> <span>Thêm
+																										chiến lược quảng cáo</span>
+																								</span>
+																							</button>
+																						</div>
+
+																					</div>
+																					<div class="row" id="tableaddAdsType1">
+																						<div class="col-md-6 col-lg-6 col-xs-12">
+																							<div
+																								class="m-form__seperator m-form__seperator--dashed m-form__seperator--space"></div>
+																							<div>
+																								<h5 class="m-portlet__head-text">
+																									Google Search
+																									<button type="button" id="keywordPlan_1"
+																										class="btn m-btn--pill    btn-outline-info btn-sm keywordInfo">Chỉ
+																										số từ khóa</button>
+																								</h5>
+
+																								<br> <br>
+																							</div>
+																							<div class="m-form__group form-group row">
+																								<label class="col-3 col-form-label">Vị
+																									trí mong muốn</label>
+																								<div class="col-9">
+																									<div class="m-radio-list">
+																										<label class="m-radio"> <input
+																											type="radio" name="top1_1" value="0.14"
+																											id="top1_1" checked> Top 1-2 <span></span>
+																										</label> <label class="m-radio"> <input
+																											type="radio" name="top1_1" value="0.12"
+																											id="top1_1"> Top 2-3 <span></span>
+																										</label>
+																									</div>
+																								</div>
+																							</div>
+																							<div class="form-group m-form__group row">
+																								<label class="col-form-label col-lg-3 col-sm-12">Mục
+																									tiêu quảng cáo</label>
+																								<div class="col-lg-8 col-md-9 col-sm-12">
+																									<div class="input-group m-input-group">
+																										<textarea class="form-control m-input"
+																											id="target1_1"
+																											placeholder="Mục tiêu quảng cáo"></textarea>
+																									</div>
+																								</div>
+																							</div>
+																							<div class="form-group m-form__group row">
+																								<label class="col-form-label col-lg-3 col-sm-12"><img
+																									id="loader1_1" class="d-none"
+																									th:src="@{/resources/images/ajax-loader.gif}" />MaxCPC</label>
+																								<div class="col-lg-8 col-md-9 col-sm-12">
+																									<div class="input-group m-input-group">
+																										<input type="number"
+																											class="form-control m-input" id="maxCpc1_1"
+																											name="maxCpc" placeholder="maxCPC">
+																										<button type="button"
+																											class="btn m-btn--square  btn-outline-info"
+																											onclick="getKeywordInfo('maxCpc1_1');">
+																											<span> <i class="la la-check"></i>&nbsp;&nbsp;
+																												<span>Lấy chỉ số</span>
+																											</span>
+																										</button>
+																									</div>
+																								</div>
+																							</div>
+																							<div class="m-form__group form-group row">
+																								<label class="col-3 col-form-label">Tính
+																									phí</label>
+																								<div class="col-9">
+																									<div class="m-radio-list">
+																										<label class="m-radio"> <input
+																											type="radio" name="charged1_1" value="CPC"
+																											id="CPC1_1" checked> CPC <span></span>
+																										</label> <label class="m-radio"> <input
+																											type="radio" name="charged1_1" value="CPV"
+																											id="CPV1_1"> CPV <span></span>
+																										</label>
+																									</div>
+																								</div>
+																							</div>
+																							<div class="form-group m-form__group row">
+																								<label class="col-form-label col-lg-3 col-sm-12">Đơn
+																									giá</label>
+																								<div class="col-lg-4 col-md-9 col-sm-12">
+																									<div class="input-group m-input-group">
+																										<input type="text"
+																											class="form-control m-input" id="price1_1"
+																											name="price" placeholder="10500">
+																									</div>
+																									<span class="m-form__help" id="txt_price">CPC,
+																										CPV,giá CPC của đối sánh chính xác </span>
+																								</div>
+																							</div>
+																							<div class="form-group m-form__group row">
+																								<label class="col-form-label col-lg-3 col-sm-12">Hiển
+																									thị Quảng cáo</label>
+																								<div class="col-lg-4 col-md-9 col-sm-12">
+																									<div class="m-input-icon">
+																										<input type="text"
+																											class="form-control m-input" id="display1_1"
+																											name="display" placeholder="12600">
+																									</div>
+																									<span class="m-form__help" id="txt_display">Số
+																										lần quảng cáo hiển thị tới người tìm kiếm</span>
+																								</div>
+																							</div>
+																							<div class="form-group m-form__group row">
+																								<label class="col-form-label col-lg-3 col-sm-12">Tỷ
+																									lệ Nhấp Quảng cáo</label>
+																								<div class="col-lg-4 col-md-9 col-sm-12">
+																									<div class="input-group m-input-group">
+																										<input type="text"
+																											class="form-control m-input" id="ctr1_1"
+																											name="ctr" placeholder="14">
+																										<div class="input-group-append">
+																											<span class="input-group-text"
+																												id="basic-addon1">%</span>
+																										</div>
+																									</div>
+																									<span class="m-form__help">Ước tính Tỷ
+																										lệ Nhấp Quảng cáo (CTR)</span>
+																								</div>
+																							</div>
+																							<div class="form-group m-form__group row">
+																							<button type="button" class="col-form-label col-lg-3 col-sm-12 btn btn-link" onclick="getAmount('1_1');">Chi phí:</button>
+																								<!-- <label class="col-form-label col-lg-3 col-sm-12">Chi phí:</label> -->
+																								<div class="col-lg-4 col-md-9 col-sm-12">
+																									<div class="input-group m-input-group">
+																										<input type="text"
+																											class="form-control m-input" id="amount1_1"
+																											name="amount1_1" placeholder="1tr" readonly>
+																										
+																									</div>
+																									<span class="m-form__help">Ước tính chi phí</span>
+																								</div>
+																							</div>
+																						</div>
+																					</div>
+
+																				</div>
+
+																			</div>
+																		</div>
+																	</div>
+
+																	<!--end::Item-->
+																</div>
+																<div class="col-sm-12">
+																	<p style="text-align: center; font-size: 30px"
+																		id="titleTableKeywordInfo">Từ khóa và các chỉ số
+																		kế hoạch 1</p>
+																	<table
+																		class="table table-striped- table-bordered table-hover table-checkable dataTable no-footer dtr-inline"
+																		id="m_table_1" role="grid"
+																		aria-describedby="m_table_1_info" style="width: 100%;">
+																	</table>
+																</div>
+																<!--end::Section-->
+															</div>
+
+
+
+
+														</div>
+													</div>
+
+													<!--end::Form-->
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<!--end: Form Wizard Step 2-->
+						</div>
+
+						<!--end: Form Body -->
+
+						<!--begin: Form Actions -->
+						<div class="m-portlet__foot m-portlet__foot--fit m--margin-top-40">
+							<div class="m-form__actions">
+								<div class="row">
+									<div class="col-lg-2"></div>
+									<div class="col-lg-4 m--align-left">
+										<a href="#"
+											class="btn btn-secondary m-btn m-btn--custom m-btn--icon"
+											data-wizard-action="prev"> <span> <i
+												class="la la-arrow-left"></i>&nbsp;&nbsp; <span>Chọn
+													từ khóa</span>
+										</span>
+										</a>
+									</div>
+									<div class="col-lg-4 m--align-right">
+										<button type="reset" class="btn btn-secondary d-none"
+											id="btnReset">Reset</button>
+										<button
+											class="btn btn-primary m-btn m-btn--custom m-btn--icon"
+											data-wizard-action="submit">
+											<span> <i class="la la-check"></i>&nbsp;&nbsp; <span>Lưu
+													lại</span>
+											</span>
+										</button>
+										<button type="button" id="btnSaveSubmit"
+											onclick="submitQuotation()"
+											class="btn btn-primary m-btn m-btn--custom m-btn--icon d-none">
+											<span> <i class="la la-check"></i>&nbsp;&nbsp; <span>Lưu
+													lại & Gửi yêu cầu duyệt</span>
+											</span>
+										</button>
+										<a href="#"
+											class="btn btn-warning m-btn m-btn--custom m-btn--icon"
+											data-wizard-action="next"> <span> <span>Tiếp
+													tục</span>&nbsp;&nbsp; <i class="la la-arrow-right"></i>
+										</span>
+										</a>
+									</div>
+									<div class="col-lg-2"></div>
+								</div>
+							</div>
+						</div>
+
+						<!--end: Form Actions -->
+					</form>
+				</div>
+
+				<!--end: Form Wizard Form-->
+			</div>
+
+			<!--end: Form Wizard-->
+		</div>
+		<div class="modal fade" id="modal-error" tabindex="-1" role="dialog"
+			aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">Oop!</h5>
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<input id="deleteId" class="d-none" />
+						<div class="form-group m-form__group" style="color: red">Có
+							lỗi xảy ra!</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+<th:block layout:fragment="script-block">
+	<script th:src="@{/resources/js/jquery.timeago.js}"
+		type="text/javascript">
+	</script>
+	<script th:src="@{/resources/theme/metronic5/assets/js/wizard.js}"
+		type="text/javascript"></script>
+	<script th:src="@{/resources/theme/metronic5/assets/js/select2.js}"
+		type="text/javascript"></script>
+	<script th:inline="javascript">
+		/*<![CDATA[*/
+
+		var strJSONArray = /*[[${classes}]]*/ '';
+		var dataJSONArray = JSON.parse(strJSONArray);
+
+		/*]]>*/
+	</script>
+	<script th:inline="javascript">
+	var quotation = [[${quotation}]];
+	console.log(quotation);
+	 var planCount=1;//Dem so ke hoach
+	 var typeOfPlan=[];//So Loai hinh quang cao trong 1 ke hoach
+	 typeOfPlan[planCount]=1;//Dem so loai hinh quang cao trong 1 ke hoach
+	 var arrKeyWordInfo=[];
+	 /* var keywordInfos=quotation.keywords; */
+	 if(quotation.quotationId!=null){
+			//neu la update
+			var keyword="";
+			var dem;
+			for(dem=0;dem<quotation.plan.length;dem++){
+				arrKeyWordInfo[dem+1]=quotation.plan[dem].type[0].keywords;
+			}
+			//bo chi so tu khoa
+			for(dem=0;dem<quotation.plan[0].type[0].keywords.length;dem++){
+				keyword+=quotation.plan[0].type[0].keywords[dem].keyword+"\n";
+			}
+			document.getElementById("suggestionKeywords").value =keyword;
+			//them vao suggestion keyword
+			while(planCount<=quotation.plan.length){
+				document.getElementById("plan"+planCount).value = quotation.plan[planCount-1].name;
+				document.getElementById("target"+planCount+"_1").value = quotation.plan[planCount-1].type[0].target;
+				document.getElementById("price"+planCount+"_1").value = quotation.plan[planCount-1].type[0].price;
+				document.getElementById("display"+planCount+"_1").value = quotation.plan[planCount-1].type[0].display;
+				document.getElementById("ctr"+planCount+"_1").value = quotation.plan[planCount-1].type[0].ctr;
+				document.getElementById("maxCpc"+planCount+"_1").value = quotation.plan[planCount-1].type[0].maxCpc;
+				document.getElementById(quotation.plan[planCount-1].type[0].charged+""+planCount+"_1").checked = true;
+				
+				var typeCount=1;
+				while(typeCount<quotation.plan[planCount-1].type.length){
+					typeCount++;
+					addTypeAds("addAdsType"+planCount);
+					
+					document.getElementById("typeSelect"+planCount+"_"+typeCount).value=quotation.plan[planCount-1].type[typeCount-1].type;
+					document.getElementById("target"+planCount+"_"+typeCount).value = quotation.plan[planCount-1].type[typeCount-1].target;
+					document.getElementById("price"+planCount+"_"+typeCount).value = quotation.plan[planCount-1].type[typeCount-1].price;
+					document.getElementById("display"+planCount+"_"+typeCount).value = quotation.plan[planCount-1].type[typeCount-1].display;
+					document.getElementById("ctr"+planCount+"_"+typeCount).value = quotation.plan[planCount-1].type[typeCount-1].ctr;
+					document.getElementById("maxCpc"+planCount+"_"+typeCount).value = quotation.plan[planCount-1].type[typeCount-1].maxCpc;
+					document.getElementById(quotation.plan[planCount-1].type[typeCount-1].charged+""+planCount+"_"+typeCount).checked = true; 
+				}
+				if(planCount==quotation.plan.length){
+					break;
+				}//kiem tra du so luong ke hoach chua
+				addPlan();
+			}
+		}
+	function addPlan(){
+		planCount++;
+		typeOfPlan[planCount]=1;
+		$("#m_accordion_1").append('<div class="m-accordion__item" id="plan_item'+planCount+'">'
+				+'<div class="m-accordion__item-head collapsed" role="tab" id="m_accordion_1_item_'+planCount+'_head" data-toggle="collapse" href="#m_accordion_1_item_'+planCount+'_body" aria-expanded="false">'
+				+'<span class="m-accordion__item-icon"><i class="fa  flaticon-placeholder"></i></span>'
+				+'<span class="m-accordion__item-title">Kế hoạch '+planCount+'</span>'
+				+'<span class="m-accordion__item-title"><button id= "'+planCount+'"type="button" class="btn m-btn--pill   btn-outline-danger btn_remove">Delete plan</button></span>'
+				+'<span class="m-accordion__item-mode"></span></div>'
+			+'<div class="m-accordion__item-body collapse" id="m_accordion_1_item_'+planCount+'_body" role="tabpanel" aria-labelledby="m_accordion_1_item_'+planCount+'_head" data-parent="#m_accordion_1" style="">'
+				+'<div class="m-accordion__item-content">'+
+				"<div>\n" + 
+				"	<div class=\"row\">\n" + 
+				"		<div class=\"col-md-2 col-lg-2 col-xs-1\"></div>\n" + 
+				"		<div class=\"form-group m-form__group row\">\n" + 
+				"			<label class=\"col-form-label col-lg-3 col-sm-12 \">Tên kế hoạch</label>\n" + 
+				"			<div class=\"col-lg-4 col-md-9 col-sm-12\">\n" + 
+				"				<div class=\"input-group m-input-group\">\n" + 
+				"					<input type=\"text\" class=\"form-control m-input\"\n" + 
+				"					id=\"plan"+planCount+"\" name=\"plan"+planCount+"\"\n" + 
+				"					placeholder=\"Name of plan\">\n" + 
+				"				</div>\n" + 
+				"			</div>\n" + 
+				"			<button type=\"button\" name=\"addAdsType"+planCount+"\"\n" + 
+				"			id=\"addAdsType"+planCount+"\"\n" + 
+				"			class=\"btn btn-outline-accent m-btn m-btn--custom m-btn--icon m-btn--outline-2x m-btn--pill m-btn--air btn_add_type\">\n" + 
+				"			<span> <i class=\"fa fa-file-excel-o\"></i>\n" + 
+				"				<i class=\"flaticon-add\"></i> <span>Thêm chiến lược quảng cáo</span>\n" + 
+				"			</span>\n" + 
+				"		</button>\n" + 
+				"	</div>\n" + 
+				"\n" + 
+				"</div>\n" + 
+				"<div class=\"row\"  id=\"tableaddAdsType"+planCount+"\">\n" + 
+				"	<div class=\"col-md-6 col-lg-6 col-xs-12\">\n" + 
+				"		<div\n" + 
+				"		class=\"m-form__seperator m-form__seperator--dashed m-form__seperator--space\"></div>\n" + 
+				"		<div>\n" + 
+				"			<h5 class=\"m-portlet__head-text\">Google" + 
+				"			Search <button type=\"button\" id=\"keywordPlan_"+planCount+"\" class=\"btn m-btn--pill    btn-outline-info btn-sm keywordInfo\">Chỉ số từ khóa</button></h5>\n" + 
+				"			<br>\n" + 
+				"			<br>\n" + 
+				"		</div>\n" + 
+				"		<div class=\"form-group m-form__group row\">\n" + 
+				"			<label class=\"col-form-label col-lg-3 col-sm-12\">Mục\n" + 
+				"			tiêu quảng cáo</label>\n" + 
+				"			<div class=\"col-lg-8 col-md-9 col-sm-12\">\n" + 
+				"				<div class=\"input-group m-input-group\">\n" + 
+				"					<textarea class=\"form-control m-input\"\n" + 
+				"					id=\"target"+planCount+"_1\"\n" + 
+				"					placeholder=\"Mục tiêu quảng cáo\"></textarea>\n" + 
+				"				</div>\n" + 
+				"			</div>\n" + 
+				"		</div>\n" + 
+				"<div class=\"m-form__group form-group row\">\n" + 
+				"	<label class=\"col-3 col-form-label\">Vị trí mong muốn</label>\n" + 
+				"		<div class=\"col-9\">\n" + 
+				"			<div class=\"m-radio-list\">\n" + 
+				"				<label class=\"m-radio\"> <input\n" + 
+				"					type=\"radio\" name=\"top"+planCount+"_1\" value=\"0.14\"\n" + 
+				"						id=\"top"+planCount+"_1\" checked> Top 1-2 <span></span>\n" + 
+				"									</label> <label class=\"m-radio\"> <input\n" + 
+				"				type=\"radio\" name=\"top"+planCount+"_1\" value=\"0.12\"\n" + 
+				"				id=\"top"+planCount+"_1\"> Top 2-3 <span></span>\n" + 
+				"				</label>\n" + 
+				"		</div>\n" + 
+				"	</div>\n" + 
+				"</div>"+
+				"<div class=\"form-group m-form__group row\">\n" + 
+				"	<label\n" + 
+				"	class=\"col-form-label col-lg-3 col-sm-12\"><img id=\"loader"+planCount+"_1\" class=\"d-none\" src=\"/resources/images/ajax-loader.gif\" />MaxCPC</label>\n" + 
+				"	<div class=\"col-lg-8 col-md-9 col-sm-12\">\n" + 
+				"		<div class=\"input-group m-input-group\">\n" + 
+				"			<input type=\"number\" class=\"form-control m-input\"\n" + 
+				"			id=\"maxCpc"+planCount+"_1\" name=\"maxCpc\" placeholder=\"maxCPC\">\n" + 
+				"			<button type=\"button\"\n" + 
+				"			class=\"btn btn-primary m-btn m-btn--custom m-btn--icon\"\n" + 
+				"			onclick=\"getKeywordInfo('maxCpc"+planCount+"_1');\">\n" + 
+				"			<span> <i class=\"la la-check\"></i>&nbsp;&nbsp;\n" + 
+				"				<span>Lấy chỉ số</span>\n" + 
+				"			</span>\n" + 
+				"		</button>" + 
+				"	</div>" + 
+				"</div>" + 
+				"</div>"+
+				"		<div class=\"m-form__group form-group row\">\n" + 
+				"			<label class=\"col-3 col-form-label\">Tính\n" + 
+				"			phí</label>\n" + 
+				"			<div class=\"col-lg-8 col-md-9 col-sm-12\">\n" + 
+				"				<div class=\"m-radio-list\">\n" + 
+				"					<label class=\"m-radio\"> <input\n" + 
+				"						type=\"radio\" name=\"charged"+planCount+"_1\" value=\"CPC\" id=\"CPC"+planCount+"_1\"\n" + 
+				"						checked> CPC <span></span>\n" + 
+				"					</label> <label class=\"m-radio\"> <input\n" + 
+				"						type=\"radio\" name=\"charged"+planCount+"_1\" value=\"CPV\" id=\"CPV"+planCount+"_1\">\n" + 
+				"						CPV <span></span>\n" + 
+				"					</label>\n" + 
+				"				</div>\n" + 
+				"			</div>\n" + 
+				"		</div>\n" + 
+				"		<div class=\"form-group m-form__group row\">\n" + 
+				"			<label class=\"col-form-label col-lg-3 col-sm-12\">Đơn\n" + 
+				"			giá</label>\n" + 
+				"			<div class=\"col-lg-4 col-md-9 col-sm-12\">\n" + 
+				"				<div class=\"input-group m-input-group\">\n" + 
+				"					<input type=\"text\"\n" + 
+				"					class=\"form-control m-input\" id=\"price"+planCount+"_1\"\n" + 
+				"					name=\"price"+planCount+"_1\" placeholder=\"10500\">\n" + 
+				"				</div>\n" + 
+				"				<span class=\"m-form__help\" id=\"txt_price\">CPC,\n" + 
+				"				CPV</span>\n" + 
+				"			</div>\n" + 
+				"		</div>\n" + 
+				"		<div class=\"form-group m-form__group row\">\n" + 
+				"			<label class=\"col-form-label col-lg-3 col-sm-12\">Hiển\n" + 
+				"			thị Quảng cáo</label>\n" + 
+				"			<div class=\"col-lg-4 col-md-9 col-sm-12\">\n" + 
+				"				<div class=\"m-input-icon\">\n" + 
+				"					<input type=\"text\"\n" + 
+				"					class=\"form-control m-input\" id=\"display"+planCount+"_1\"\n" + 
+				"					name=\"display\" placeholder=\"12600\">\n" + 
+				"				</div>\n" + 
+				"				<span class=\"m-form__help\" id=\"txt_display\">Số\n" + 
+				"				lần quảng cáo hiển thị tới người tìm kiếm</span>\n" + 
+				"			</div>\n" + 
+				"		</div>\n" + 
+				"		<div class=\"form-group m-form__group row\">\n" + 
+				"			<label class=\"col-form-label col-lg-3 col-sm-12\">Tỷ\n" + 
+				"			lệ Nhấp Quảng cáo</label>\n" + 
+				"			<div class=\"col-lg-4 col-md-9 col-sm-12\">\n" + 
+				"				<div class=\"input-group m-input-group\">\n" + 
+				"					<input type=\"text\"\n" + 
+				"					class=\"form-control m-input\" id=\"ctr"+planCount+"_1\"\n" + 
+				"					name=\"ctr\" placeholder=\"14\">\n" + 
+				"					<div class=\"input-group-append\">\n" + 
+				"						<span class=\"input-group-text\"\n" + 
+				"						id=\"basic-addon1\">%</span>\n" + 
+				"					</div>\n" + 
+				"				</div>\n" + 
+				"				<span class=\"m-form__help\">Ước tính Tỷ\n" + 
+				"				lệ Nhấp Quảng cáo (CTR)</span>\n" + 
+				"			</div>\n" + 
+				"		</div>\n" +
+				"<div class=\"form-group m-form__group row\">\n" + 
+				"	<button type=\"button\" class=\"col-form-label col-lg-3 col-sm-12 btn btn-link\" onclick=\"getAmount('"+planCount+"_1');\">Chi phí:</button>\n" + 
+				"	<!-- <label class=\"col-form-label col-lg-3 col-sm-12\">Chi phí:</label> -->\n" + 
+				"	<div class=\"col-lg-4 col-md-9 col-sm-12\">\n" + 
+				"		<div class=\"input-group m-input-group\">\n" + 
+				"			<input type=\"text\"\n" + 
+				"			class=\"form-control m-input\" id=\"amount"+planCount+"_1\"\n" + 
+				"			name=\"amount1_1\" placeholder=\"1tr\" readonly>\n" + 
+				"			\n" + 
+				"		</div>\n" + 
+				"		<span class=\"m-form__help\">Ước tính chi phí</span>\n" + 
+				"	</div>\n" + 
+				"</div>"+
+				"	</div>\n" + 
+				"</div>\n" + 
+				"</div>"
+			+'</div></div></div>'
+				);
+	}
+	function addTypeAds(button_id){
+		var indexPlan=button_id.substring(10);
+		typeOfPlan[indexPlan]++;  //Tang so luong loai hinh quang cao len
+		console.log(typeOfPlan);
+		$('#table'+button_id).append("<div class=\"col-md-6 col-lg-6 col-xs-12\">\n" + 
+				"	<div\n" + 
+				"	class=\"m-form__seperator m-form__seperator--dashed m-form__seperator--space\"></div>\n" + 
+				"	<select\n" + 
+				"	class=\"form-control m-input m-input--square\"\n" + 
+				"	id=\"typeSelect"+indexPlan+"_"+typeOfPlan[indexPlan]+"\">\n" + 
+				"	<option value=\"Google Search\">Google Search</option>\n" + 
+				"	<option value=\"Google Re-Marketing\">Google Re-Marketing</option>\n" + 
+				"	<option value=\"Google GDN\">Google GDN</option>\n" + 
+				"	<option value=\"Google Shopping\">Google Shopping</option>\n" + 
+				"</select> <span class=\"m-form__help\">Chọn loại hình\n" + 
+				"quảng cáo</span>\n" + 
+				"\n" + 
+				"<div class=\"form-group m-form__group row\">\n" + 
+				"	<label class=\"col-form-label col-lg-3 col-sm-12\">Mục\n" + 
+				"	tiêu quảng cáo </label>\n" + 
+				"	<div class=\"col-lg-8 col-md-9 col-sm-12\">\n" + 
+				"		<div class=\"input-group m-input-group\">\n" + 
+				"			<textarea class=\"form-control m-input\"\n" + 
+				"			id=\"target"+indexPlan+"_"+typeOfPlan[indexPlan]+"\" placeholder=\"Mục tiêu quảng cáo\"></textarea>\n" + 
+				"		</div>\n" + 
+				"	</div>\n" + 
+				"</div>\n" + 
+				/* "<div class=\"form-group m-form__group row\">\n" + 
+				"	<label\n" + 
+				"	class=\"col-form-label col-lg-3 col-sm-12\"><img id=\"loader"+planCount+"_"+typeOfPlan[indexPlan]+"\" class=\"d-none\" src=\"/resources/images/ajax-loader.gif\" />MaxCPC</label>\n" + 
+				"	<div class=\"col-lg-8 col-md-9 col-sm-12\">\n" + 
+				"		<div class=\"input-group m-input-group\">\n" + 
+				"			<input type=\"number\" class=\"form-control m-input\"\n" + 
+				"			id=\"maxCpc"+planCount+"_"+typeOfPlan[indexPlan]+"\" name=\"maxCpc\" placeholder=\"maxCPC\">\n" + 
+				"			<button type=\"button\"\n" + 
+				"			class=\"btn btn-primary m-btn m-btn--custom m-btn--icon\"\n" + 
+				"			onclick=\"getKeywordInfo('maxCpc"+planCount+"_"+typeOfPlan[indexPlan]+"');\">\n" + 
+				"			<span> <i class=\"la la-check\"></i>&nbsp;&nbsp;\n" + 
+				"				<span>Lấy chỉ số</span>\n" + 
+				"			</span>\n" + 
+				"		</button>" + 
+				"	</div>" + 
+				"</div>" +
+				"</div>"+ */
+				"<div class=\"m-form__group form-group row\">\n" + 
+				"	<label class=\"col-3 col-form-label\">Tính\n" + 
+				"	phí</label>\n" + 
+				"	<div class=\"col-9\">\n" + 
+				"		<div class=\"m-radio-list\">\n" + 
+				"			<label class=\"m-radio\"> <input\n" + 
+				"				type=\"radio\" name=\"charged"+indexPlan+"_"+typeOfPlan[indexPlan]+"\" value=\"CPC\" id=\"CPC"+indexPlan+"_"+typeOfPlan[indexPlan]+"\"\n" + 
+				"				 checked> CPC <span></span>\n" + 
+				"			</label> <label class=\"m-radio\"> <input\n" + 
+				"				type=\"radio\" name=\"charged"+indexPlan+"_"+typeOfPlan[indexPlan]+"\" value=\"CPV\" id=\"CPV"+indexPlan+"_"+typeOfPlan[indexPlan]+"\">\n" + 
+				"				CPV <span></span>\n" + 
+				"			</label>\n" + 
+				"		</div>\n" + 
+				"	</div>\n" + 
+				"</div>\n" + 
+				"<div class=\"form-group m-form__group row\">\n" + 
+				"	<label class=\"col-form-label col-lg-3 col-sm-12\">Đơn\n" + 
+				"	giá </label>\n" + 
+				"	<div class=\"col-lg-4 col-md-9 col-sm-12\">\n" + 
+				"		<div class=\"input-group m-input-group\">\n" + 
+				"			<input type=\"text\"\n" + 
+				"			class=\"form-control m-input\" id=\"price"+indexPlan+"_"+typeOfPlan[indexPlan]+"\"\n" + 
+				"			name=\"price"+indexPlan+"_"+typeOfPlan[indexPlan]+"\" placeholder=\"1500\" >\n" + 
+				"		</div>\n" + 
+				"		<span class=\"m-form__help\" id=\"txt_price_re\">CPC,\n" + 
+				"		CPV</span>\n" + 
+				"	</div>\n" + 
+				"</div>\n" + 
+				"<div class=\"form-group m-form__group row\">\n" + 
+				"	<label class=\"col-form-label col-lg-3 col-sm-12\">Hiển\n" + 
+				"	thị Quảng cáo </label>\n" + 
+				"	<div class=\"col-lg-4 col-md-9 col-sm-12\">\n" + 
+				"		<div class=\"m-input-icon\">\n" + 
+				"			<input type=\"text\"\n" + 
+				"			class=\"form-control m-input\" \n" + 
+				"			id=\"display"+indexPlan+"_"+typeOfPlan[indexPlan]+"\" name=\"display"+indexPlan+"_"+typeOfPlan[indexPlan]+"\"\n" + 
+				"			placeholder=\"12600\">\n" + 
+				"		</div>\n" + 
+				"		<span class=\"m-form__help\" id=\"txt_display_re\">Số\n" + 
+				"		lần quảng cáo hiển thị tới người tìm kiếm</span>\n" + 
+				"	</div>\n" + 
+				"</div>\n" + 
+				"<div class=\"form-group m-form__group row\">\n" + 
+				"	<label class=\"col-form-label col-lg-3 col-sm-12\">Tỷ\n" + 
+				"	lệ Nhấp Quảng cáo </label>\n" + 
+				"	<div class=\"col-lg-4 col-md-9 col-sm-12\">\n" + 
+				"		<div class=\"input-group m-input-group\">\n" + 
+				"			<input type=\"text\"\n" + 
+				"			class=\"form-control m-input\" id=\"ctr"+indexPlan+"_"+typeOfPlan[indexPlan]+"\"\n" + 
+				"			name=\"ctr"+indexPlan+"_"+typeOfPlan[indexPlan]+"\" placeholder=\"1\" >\n" + 
+				"			<div class=\"input-group-append\">\n" + 
+				"				<span class=\"input-group-text\"\n" + 
+				"				id=\"basic-addon1\">%</span>\n" + 
+				"			</div>\n" + 
+				"		</div>\n" + 
+				"		<span class=\"m-form__help\">Ước tính Tỷ\n" + 
+				"		lệ Nhấp Quảng cáo (CTR)</span>\n" + 
+				"	</div>\n" + 
+				"</div>\n" + 
+				"</div>");
+	}
+	$(document).ready(function(){
+		$("#addplan").click(addPlan);
+		$(document).on('click','.btn_remove',function(){
+			var button_id=$(this).attr("id");
+			$("#plan_item"+button_id).remove();
+			typeOfPlan[button_id]=0;
+			
+		});
+		$(document).on('click','.btn_add_type',function(){
+			var button_id=$(this).attr("id");
+			addTypeAds(button_id);
+		});
+		});
+	</script>
+	<script th:inline="javascript">
+	
+	/* var arrKeywords=[];
+	function generateTable() {
+		var table = $('<table id="excel_table" class="table table-striped- table-bordered table-hover table-checkable dataTable no-footer dtr-inline" role="grid" width="100%" />');
+		$('#data_table').html(table);//Khoi tao table trong ham 
+		var suggestionKeywords = $('#suggestionKeywords').val().trim().split("\n");
+	    var max_cpcs=$('#max_cpc').val().trim().split("\n");
+	    var dataSet=[];
+	    var length=suggestionKeywords.length<max_cpcs.length?suggestionKeywords.length:max_cpcs.length;
+	    var i;
+	    for(i=0;i<length;i++){
+	    	if(suggestionKeywords[i]=="") suggestionKeywords[i]="noname";
+	    	if(max_cpcs[i]=="") max_cpcs[i]="0.0";
+	    	dataSet.push([suggestionKeywords[i],max_cpcs[i]]);
+	    }
+	    console.log(dataSet);
+	   arrKeywords=dataSet;
+	    $(document).ready(function() {
+	        $('#excel_table').DataTable( {
+	            data: dataSet,
+	            columns: [
+	                { title: "Key Word" },
+	                { title: "Max CPC" }
+	            ]
+	        } );
+	    } );
+	    
+	} */
+	
+    
+		var FormControls = {
+			init: function () {
+				$("#form-category").validate({
+					rules: {
+						categoryName: { required: !0 }
+					},
+					submitHandler: function (e) {
+						performPost(e);
+					}
+				});
+
+				$("#update-form-category").validate({
+					rules: {
+						updateCategoryName: { required: !0 }
+					},
+					submitHandler: function (e) {
+						performPut(e);
+					}
+				});
+			}
+		}
+		//lay du lieu loai hinh quang cao
+		function getType(plan,indexType) {
+			  var data={};
+			  if(indexType==1){
+				  data.type="Google Search";
+			  }else{
+				  var e=document.getElementById("typeSelect"+plan+"_"+indexType);
+				  data.type=e.options[e.selectedIndex].value;
+			  }
+			  data.maxCpc=($('#maxCpc'+plan+"_"+indexType).val() == null || $('#maxCpc'+plan+"_"+indexType).val() == "") ? 0 : $('#maxCpc'+plan+"_"+indexType).val();
+			  data.target = $('#target'+plan+"_"+indexType).val().replace("\n","</br>");
+			  data.charged= $('input[name=charged'+plan+'_'+indexType+']:checked').val();
+			  data.price = ($('#price'+plan+"_"+indexType).val() == null || $('#price'+plan+"_"+indexType).val() == "") ? 0 : $('#price'+plan+"_"+indexType).val();
+			  data.display = ($('#display'+plan+"_"+indexType).val() == null || $('#display'+plan+"_"+indexType).val() == "") ? 0 : $('#display'+plan+"_"+indexType).val();
+			  data.ctr = ($('#ctr'+plan+"_"+indexType).val() == null || $('#ctr'+plan+"_"+indexType).val() == "") ? 0 : $('#ctr'+plan+"_"+indexType).val();
+			  if(data.type=="Google Search"){
+				  data.keywords=arrKeyWordInfo[plan];
+			  }
+			  
+			  return data;
+			}
+		//lay tat ca loai hinh quang cao cua ke hoach x
+		 function QuotationAdsType(plan){
+			planType=[];
+			var i;
+			for(i=1;i<=typeOfPlan[plan];i++){
+				planType.push(getType(plan,i));
+			}
+			return planType;
+		}
+		//end lay tat ca loai hinh quang cao cua ke hoach x
+		//get ke hoach
+		function getPlan(plan){
+			var data={};
+			data.name=$('#plan'+plan).val();
+			data.type=QuotationAdsType(plan);
+			return data;
+		}
+		//end get ke hoach(don le)
+		
+		function getAllPlan(){
+			var allPlan=[];
+			var i;
+			for(i=1;i<planCount+1;i++){
+				if(typeOfPlan[i]>0){
+					allPlan.push(getPlan(i));
+				}
+			}
+			return allPlan;
+		}
+		function getKeyWords(){
+			var keywords=getAllKeyword();
+			return keywords.map(function(keyword){
+				var newKeyword={};
+				newKeyword.keyword=keyword;
+				return newKeyword;
+			});
+			/* return keywordInfo.map(function(obj){
+			    obj.maxCpc = $("#maxCpc"+index+"_1").val();
+			    return obj;
+			}); */
+		}//lay keyword cua quotation
+		function getPlanId(){
+			
+		}
+		if(quotation.quotationId!=null){
+			var arrKeyWordId = quotation.keywords.map(obj =>{ 
+				   return obj.id;
+				});//lay id cac keyword id
+			/* quotation.plan.forEach(function(pln) {
+			  temp=pln.type[0].keywords.map(obj =>{ 
+				   return obj.id;
+				});//lay id cac keyword id
+				arrKeyWordId=arrKeyWordId.concat(temp);
+				
+			}); */
+			
+			var arrPlanId = quotation.plan.map(obj =>{ 
+				   return obj.id;
+			});//lay id cac plan
+			var arrTypeAdsIds=quotation.plan.map(obj =>{ 
+				var typeAdsId=[];
+				typeAdsId=obj.type.map(planx =>{ 
+					   return planx.id;
+				});
+				   return typeAdsId;
+			});//lay arr cac arr id cua loai hinh quang cao
+			var arrTypeAdsId=[].concat.apply([],arrTypeAdsIds);//concat cac array trong list voi nhau
+		}
+		function getApprover(){
+			var approver=$('#approver_email').val();
+			if(approver=='other') return $('#approver').val();//Neu check la Other
+			else return approver;
+		}//Lay email nguoi phe duyet
+		var getData = function(){
+			
+			var data = {};
+			data.quotationId = $("#quotationId").val();
+			data.partnerId = $("#partnerId").val();
+			data.partnerName = $("#partner").val();
+			data.partnerWebsite = $('#url').val();
+			data.inChargePartner = $('#inChargePartner').val();
+			/* data.googleSheetLink = $('#googleSheetLink').val(); */
+			data.mainProductService = $('#mainProductService').val();
+			data.suggestionKeywords = $('#suggestionKeywords').val();
+			data.geoArea =getLocationIds().join(',');
+			data.expectedBudget = $('#expectedBudget').val();
+			data.usedToAdvertise = $('input[name=usedToAdvertise]:checked').val();
+			data.previousPartner = $('#previousPartner').val();
+			data.quitReason = $('#quitReason').val();
+			data.previousBudget = $('#previousBudget').val();
+			data.approver = getApprover();
+			data.dueDate = $('#dueDate').val();
+			data.plan=getAllPlan();
+			data.keywords=getKeyWords();
+			/* data.averageCpc=$("#averageCpc").val();
+    		data.clicks=$("#clicks").val();
+    		data.costs=$("#costs").val();
+    		data.ctr=$("#ctr").val();
+    		data.impressions=$("#impressions").val(); */
+			data.vat=$('input[name=vat]:checked').val();
+			if(quotation.quotationId!=null){
+				data.keyWordID=arrKeyWordId;
+				data.planID=arrPlanId;
+				data.typeAds=arrTypeAdsId;
+			}
+			
+			return data;
+		}
+		var saveQuotation = function(){
+			var data = getData();
+			var settings = {
+
+		            /* Set proper headers before send */ 
+		            beforeSend: function(xhr, options) {
+
+		                /* Provide csrf token, otherwise backend returns 403. */
+		                xhr.setRequestHeader("X-CSRF-TOKEN", [[ ${_csrf.token} ]]);
+
+		                /* Send json content */
+		                xhr.setRequestHeader("content-type" ,"application/json; charset=utf-8");
+		            },
+		            type: 'POST',
+		            url: [[ @{/quotations} ]],
+		            data: JSON.stringify(data)
+		        }
+			
+	            $.ajax(settings)
+		        	.done(function(result) {
+
+			            /* 
+			                Replace your fragment with newly rendered fragment. 
+			                Reference fragment by provided id
+			            */
+			            
+		        		window.location.replace("/quotation/my-quotations");
+		        	})
+		        	.fail(function(result) {
+		        		$('#modal-error').modal('show');
+		        	});
+		}
+		
+		var submitQuotation = function(){
+			if(!$("#m_form").valid()){
+				return;
+			}
+			var data = getData();
+			var settings = {
+
+		            /* Set proper headers before send */ 
+		            beforeSend: function(xhr, options) {
+
+		                /* Provide csrf token, otherwise backend returns 403. */
+		                xhr.setRequestHeader("X-CSRF-TOKEN", [[ ${_csrf.token} ]]);
+
+		                /* Send json content */
+		                xhr.setRequestHeader("content-type" ,"application/json; charset=utf-8");
+		            },
+		            type: 'POST',
+		            url: "/quotations/submit",
+		            data: JSON.stringify(data)
+		        }
+			
+	            $.ajax(settings)
+		        	.done(function(result) {
+
+			            /* 
+			                Replace your fragment with newly rendered fragment. 
+			                Reference fragment by provided id
+			            */
+			            
+		        		window.location.replace("/quotation/my-quotations");
+		        	})
+		        	.fail(function(result) {
+		        		$('#modal-error').modal('show');
+		        	});
+		}
+		
+		var performPost = function(e) {
+	        /* Prepare data that have to be send */
+	        var data = {};
+	        data.url = $('#url').val();//partner website
+// 	        data.price = ($('#price').val() == null || $('#price').val() == "") ? 0 : $('#price').val();
+// 	        data.target = $('#target').val().replace("\n","</br>");
+// 	        data.display = ($('#display').val() == null || $('#display').val() == "") ? 0 : $('#display').val();
+// 	        data.ctr = ($('#ctr').val() == null || $('#ctr').val() == "") ? 0 : $('#ctr').val();
+// 	        data.target_re = $('#target_re').val().replace("\n","</br>");
+// 	        data.price_re = ($('#price_re').val() == null || $('#price_re').val() == "") ? 0 : $('#price_re').val();
+// 	        data.display_re = ($('#display_re').val() == null || $('#display_re').val() == "") ? 0 : $('#display_re').val();
+// 	        data.ctr_re = ($('#ctr_re').val() == null || $('#ctr_re').val() == "") ? 0 : $('#ctr_re').val();
+// 	        data.target_gdn = $('#target_gdn').val().replace("\n","</br>");
+// 	        data.price_gdn = ($('#price_gdn').val() == null || $('#price_gdn').val() == "") ? 0 : $('#price_gdn').val();
+// 	        data.display_gdn = ($('#display_gdn').val() == null || $('#display_gdn').val() == "") ? 0 : $('#display_gdn').val();
+// 	        data.ctr_gdn = ($('#ctr_gdn').val() == null || $('#ctr_gdn').val() == "") ? 0 : $('#ctr_gdn').val();
+// 	        data.target_shop = $('#target_shop').val().replace("\n","</br>");
+// 	        data.price_shop = ($('#price_shop').val() == null || $('#price_shop').val() == "") ? 0 : $('#price_shop').val();
+// 	        data.display_shop = ($('#display_shop').val() == null || $('#display_shop').val() == "") ? 0 : $('#display_shop').val();
+// 	        data.ctr_shop = ($('#ctr_shop').val() == null || $('#ctr_shop').val() == "") ? 0 : $('#ctr_shop').val();        
+// 	        data.inChargeUser = $('#displayName').val();
+// 	        data.inChargeUsername = $('#userLogin').val();
+// 	        data.inChargeUserPhone = $('#userPhone').val();
+// 	        data.charged = $("input[name=charged]:checked").val();
+// 	        data.charged_re = $("input[name=charged_re]:checked").val();
+// 	        data.charged_gdn = $("input[name=charged_gdn]:checked").val();
+// 	        data.charged_shop = $("input[name=charged_shop]:checked").val();
+	        data.partner = $('#partner').val();
+	        data.inChargePartner = $('#inChargePartner').val();
+	        data.googleSheetLink = $('#inChargePartner').val();
+
+	        /* Prepare ajax post settings */
+	        var settings = {
+
+	            /* Set proper headers before send */ 
+	            beforeSend: function(xhr, options) {
+
+	                /* Provide csrf token, otherwise backend returns 403. */
+	                xhr.setRequestHeader("X-CSRF-TOKEN", [[ ${_csrf.token} ]]);
+
+	                /* Send json content */
+	                xhr.setRequestHeader("content-type" ,"application/json; charset=utf-8");
+	            },
+	            type: 'POST',
+	            url: [[ @{/actions/doit} ]],
+	            data: JSON.stringify(data)
+	        }
+
+	        /* Send request to backend with above settings and provide success callback */
+	        $.ajax(settings)
+	        	.done(function(result) {
+
+		            /* 
+		                Replace your fragment with newly rendered fragment. 
+		                Reference fragment by provided id
+		            */
+		            
+	        		var path = window.location.origin + '/quotation?n=' + result ;
+	        		$("#successNotification").removeClass("d-none");
+	        		setTimeout(function(){ $("#successNotification").addClass("d-none"); }, 5000)
+		            window.open(path, '_blank');
+	        	})
+	        	.fail(function(result) {
+	        		$('#modal-error').modal('show');
+	        	});
+	    }
+		
+		var search = function(){
+			var str = $('#searchCategory').val();
+			$("#m_tree_6").jstree("close_all");
+			$.each($(".jstree-anchor"), function(j, v){
+				$("#m_tree_6").jstree(true).show_node($(v).attr('id'));	
+			});
+			if(str == null || str == ""){
+				$("#m_tree_6").jstree(true).refresh();
+			}
+			$.ajax({
+				beforeSend: function (xhr, options) {
+					xhr.setRequestHeader("X-CSRF-TOKEN", [[${ _csrf.token }]]);
+				},
+				type: 'GET',
+				url: '/categories?str=' + str
+			}).done(function (result) {				
+				if(result == null || result.length == 0){
+					return;
+				}
+				$.each(result, function(i, v){
+					$("#m_tree_6").jstree(true).open_node(v + "_anchor");
+				});
+				$.each($(".jstree-anchor"), function(j, v){		
+					var id = $(v).attr('id').replace("_anchor", "");
+					if(result.indexOf(id) <= -1){
+						$("#m_tree_6").jstree(true).hide_node($(v).attr('id'));						
+					}
+				})
+			}).fail(function (err) {
+			});
+		}
+
+		var showKeyDetails = function (e) {
+			var id = e.id;
+			if (id != null) {
+				$.ajax({
+					type: 'GET',
+					url: '/list-keywords?categoryIds=' + id
+				})
+					.done(function (result) {
+						currentSelectedKeywords = []
+						if (result != null && result.length > 0) {
+							var innerHtml = ['<div class="row"><div class="col m--align-left"><label class="m-checkbox m-checkbox--primary mb-sm-3">' +
+								'<input type="checkbox" id="checkAll" checked>&nbsp;<span></span></label></div>' +
+								'</div>'];
+							$.each(result, function (index, value) {
+								var checked = '';
+								if ($.inArray(value.keywordId, ignoreKeyword) == -1) {
+									currentSelectedKeywords.push(value.keywordId);
+									checked = 'checked';
+								}
+								innerHtml.push('<div class="row bg-light">' +
+									'<div class="col m--align-left"><label class="m-checkbox m-checkbox--primary"> <input class="keyword" type="checkbox" ' +
+									checked + ' value="' +
+									value.keywordId + '">' +
+									value.keyword + '<span>  </span></div>' +
+									'</div>');
+							})
+							$("#keyword-group-key").html(innerHtml.join('<hr>'));
+							$("#keyword-group-name").html(e.text);
+							if(currentSelectedKeywords.length > 0){
+								$("#btnEditKeyword").removeClass("d-none");
+								$("#btnDeleteKeyword").removeClass("d-none");
+							}
+						} else {
+							$("#keyword-group-key").html(null);
+							$("#keyword-group-name").html(e.text);
+						}
+					})
+					.fail(function (result) {
+						$("#keyword-group-key").html(null);
+						$("#keyword-group-name").html(e.text);
+					});
+			}
+		}
+
+		var copyKeywords = function () {
+			$('#modal-keydetails-view').modal('hide');
+			copyKeywordsToClipboard();
+		}
+
+		var copyKeywordsToClipboard = function () {
+			var copyTest = document.queryCommandSupported('copy');
+
+			if (copyTest === true) {
+				var copyTextArea = document.getElementById("keyworld-list");
+				copyTextArea.select();
+				try {
+					var successful = document.execCommand('copy');
+					var msg = successful ? 'Copied!' : 'Whoops, not copied!';
+				} catch (err) {
+					console.log('Oops, unable to copy');
+				}
+				/* document.body.removeChild(copyTextArea); */
+			} else {
+				// Fallback if browser doesn't support .execCommand('copy')
+				window.prompt("Copy to clipboard: Ctrl+C or Command+C, Enter", text);
+			}
+		}
+
+		var showKeywords = function () {
+			var r = $("#m_tree_6").jstree("get_selected");
+			if(r == null || r.length == 0){
+				$("#numOfKeyword").text(0);
+				$("#keyworld-list").html(null);
+				return;
+			}
+
+			$.ajax({
+				type: 'GET',
+				url: '/all-keywords?categoryIds=' + r.join(",")
+			})
+				.done(function (result) {
+					var listKeywords = new Set();
+					$.each(result, function (i, v) {
+						var index = ignoreKeyword.indexOf(v.keywordId);
+						if (index == -1) {
+							listKeywords.add(v.keyword);
+						}
+					})
+					var array = Array.from(listKeywords);
+					$("#numOfKeyword").text(array.length);
+					$("#keyworld-list").html(array.join("\n"));
+				})
+				.fail(function (result) {
+				});
+		}
+		
+
+		var getAllKeyword = function () {
+			var suggestionKeywords=($("#suggestionKeywords").val().trim()+"\n"+$("#keyworld-list").val()).trim();
+			if(suggestionKeywords===""){
+				alert("Chưa có từ khóa nào được chọn!");
+				return;
+			} else{
+				return suggestionKeywords.split("\n");
+			}
+			
+		}
+		var getLocationIds=function(){
+			var LocationIds= $('#m_select2_3').val();//Name: geoArea
+			if(typeof LocationIds !== 'undefined' && LocationIds.length > 0){
+				return LocationIds
+			} 
+			alert("Chưa có khu vực nào được chọn!");
+			return;
+		}
+		var getKeywordInfo= function(maxCpcId){
+			var data={};
+			var vitri=maxCpcId.substring(6);
+			data.locationIds=getLocationIds();
+			data.keywords=getAllKeyword();
+			data.maxCpc=$('#'+maxCpcId).val();
+			console.log(JSON.stringify(data));
+			if($('#price'+vitri).val()=='undefined'||$('#price'+vitri).val()==""){
+				alert("Chưa điền đơn giá!");
+				return;
+			}
+			$("#loader"+vitri).removeClass("d-none");
+			var settings = {
+		            /* Set proper headers before send */ 
+		            beforeSend: function(xhr, options) {
+	
+		                /* Send json content */
+		                xhr.setRequestHeader("content-type" ,"application/json; charset=utf-8");
+		            },
+		            type: 'POST',
+		            url: 'http://dev.adstech.vn:8082/keyword-forecast',
+		            data: JSON.stringify(data)
+		            
+		        }
+			$.ajax(settings)
+        	.done(function(result) {
+	            /* 
+	                Replace your fragment with newly rendered fragment. 
+	                Reference fragment by provided id
+	            */
+	            $("#loader"+vitri).addClass("d-none");
+        		console.log(result);
+        		var ctr_top= $('input[name=top'+vitri+']:checked').val();
+        		var ctr=result.response.ctr;
+        		var price=$('#price'+vitri).val();      		
+        		/* $("#price"+vitri).val(result.response.averageCpc); */
+        		/* $("#clicks").val(result.response.clicks);
+        		$("#costs").val(result.response.costs); */
+        		var cost=result.response.costs*ctr_top/ctr;
+        		var kpi=cost/price;
+        		$("#display"+vitri).val(Math.floor(kpi/ctr_top));
+        		$("#ctr"+vitri).val(ctr_top*100);
+        		$("#amount"+vitri).val(Math.floor(kpi*price));
+        		
+        		if(result.code!="success"){
+        			alert("Tải thông tin thất bại, mời kiểm tra dữ liệu từ khóa, vị trí, maxCpc!");
+        		}
+        		if(vitri.substring(vitri.length - 2)=='_1'){
+        			arrKeyWordInfo[vitri.substring(0,vitri.indexOf("_"))]=result.response.keywords.sort(function (a, b) {
+        				  return b.cost - a.cost;
+        			});
+        			$('#titleTableKeywordInfo').text('Từ khóa và các chỉ số kế hoạch '+vitri.substring(0,vitri.indexOf("_")));
+            		jQuery(document).ready(function() {
+            			$('#m_table_1').DataTable({
+            				destroy: true,
+            				"data":result.response.keywords,
+            				"columns" : [ {
+            					"data" : "keyword",
+            					"title" : "Keyword"
+            				}, {
+            					"data" : "dailyClicks",
+            					"title" : "Daily Clicks",
+            					"render": $.fn.dataTable.render.number(',', '.', 2, '')
+            				},  {
+            					"data" : 'dailyImpressions',
+            					"title" : "Daily Impressions ",
+            					"render": $.fn.dataTable.render.number(',', '.', 2, '')
+            				}, {
+            					"data" : "averageCpc",
+            					"title" : "average Cpc",
+            					"render": $.fn.dataTable.render.number(',', '.', 2, '')
+            				}, {
+            					"data" : "cost",
+            					"title" : "cost",
+            					"render": $.fn.dataTable.render.number(',', '.', 2, '')
+            				}, {
+            					"data" : "ctr",
+            					"title" : "ctr",
+            					"render": $.fn.dataTable.render.number(',', '.', 2, '')
+            				}]
+            			});
+            			
+            			alert("Tải thông tin từ khóa thành công, mời xem dưới bảng!");
+            		});
+        		}
+        		
+        	})
+        	.fail(function(result) {
+        		$('#modal-error').modal('show');
+        		alert("Lỗi tải thông tin từ khóa, mời thử lại!");
+        		console.log(result);
+        	});
+		}
+		var getAmount=function(vitri){
+			var kpi=$("#display"+vitri).val()*$("#ctr"+vitri).val();
+			$("#amount"+vitri).val(Math.floor(kpi/100*$('#price'+vitri).val()));
+		}
+		var bindTechnician = function(){
+			$.ajax({
+				type: 'GET',
+				url: '/user/technicians',
+				beforeSend: function (xhr, options) {
+					xhr.setRequestHeader("X-CSRF-TOKEN", [[${ _csrf.token }]]);
+				}
+			})
+			.done(function (result) {
+				
+				var listOptions = "";
+				$.each(result, function (i, v) {
+					var temp = '<option ' + ([[${quotation.approver}]] == v.userLogin ? 'selected' : '') + '>' + v.userLogin + '</option>';
+					listOptions += temp;
+				})
+				$("#approver_email").html(listOptions);
+			})
+			.fail(function (result) {
+			});
+		}
+		jQuery(document).ready(function() {
+			/* if(quotation.keywords!=null&&quotation.keywords[0].maxCpc!=null){
+				$('#maxCpc').val(quotation.keywords[0].maxCpc);
+			} */
+			if(arrKeyWordInfo[1]){
+				$('#m_table_1').DataTable({
+					destroy: true,
+					"data":arrKeyWordInfo[1],
+					"columns" : [ {
+						"data" : "keyword",
+						"title" : "Keyword"
+					}, {
+						"data" : "dailyClicks",
+						"title" : "Daily Clicks",
+						"render": $.fn.dataTable.render.number(',', '.', 2, '')
+					},  {
+						"data" : 'dailyImpressions',
+						"title" : "Daily Impressions ",
+						"render": $.fn.dataTable.render.number(',', '.', 2, '')
+						
+					}, {
+						"data" : "averageCpc",
+						"title" : "average Cpc",
+						"render": $.fn.dataTable.render.number(',', '.', 2, '')
+					}, {
+						"data" : "cost",
+						"title" : "cost",
+						"render": $.fn.dataTable.render.number(',', '.', 2, '')
+					}, {
+						"data" : "ctr",
+						"title" : "ctr",
+						"render": $.fn.dataTable.render.number(',', '.', 2, '')	
+					}]
+				});
+			}
+			
+			$(document).on('click','.keywordInfo',function(){
+				var button_id=$(this).attr("id");
+				var plani=button_id.substring(button_id.indexOf("_")+1);
+				$('#titleTableKeywordInfo').text('Từ khóa và các chỉ số kế hoạch '+plani);
+				$('#m_table_1').DataTable({
+					destroy: true,
+					"data":arrKeyWordInfo[plani],
+					"columns" : [ {
+						"data" : "keyword",
+						"title" : "Keyword"
+					}, {
+						"data" : "dailyClicks",
+						"title" : "Daily Clicks",
+						"render": $.fn.dataTable.render.number(',', '.', 2, '')
+					},  {
+						"data" : 'dailyImpressions',
+						"title" : "Daily Impressions ",
+						"render": $.fn.dataTable.render.number(',', '.', 2, '')
+						
+					}, {
+						"data" : "averageCpc",
+						"title" : "average Cpc",
+						"render": $.fn.dataTable.render.number(',', '.', 2, '')
+					}, {
+						"data" : "cost",
+						"title" : "cost",
+						"render": $.fn.dataTable.render.number(',', '.', 2, '')
+					}, {
+						"data" : "ctr",
+						"title" : "ctr",
+						"render": $.fn.dataTable.render.number(',', '.', 2, '')
+					}]
+				}); 
+				//table
+			});
+			
+		});
+		jQuery(document).ready(function () {
+			bindTechnician();
+			if($("#quotationId").val() != null && $("#quotationId").val() != ""){
+				$("#btnSaveSubmit").removeClass("d-none");
+			}
+			if($("#dueDate").val() == null || $("#dueDate").val() == ""){
+				document.getElementById("dueDate").valueAsDate = new Date();
+			}
+			FormControls.init();
+			ignoreKeyword = [];
+			currentSelectedKeywords = [];
+			roles = $("#role").text().replace("[", "").replace("]", "").trim().split(",");
+			$("#confirmDelete").on("click", function () {
+				performDelete();
+			});
+
+			$(".edit-category").on("click", function () {
+				var id = $("#updateCategoryId").val();
+				$.ajax({
+					type: 'GET',
+					url: [[ @{/categories} ]] + "/" + id
+			}).done(function (result) {
+				$("#updateDescription").val(result.description);
+			})
+				.fail(function (result) {
+				});
+		});
+
+		$("#m_tree_6").jstree({
+			core: {
+				themes: { responsive: !1 },
+				check_callback: !0,
+				data: {
+					url: function (e) {
+						//return "https://keenthemes.com/metronic/themes/themes/metronic/dist/preview/inc/api/jstree/ajax_data.php";
+						return "/categories";
+					},
+					data: function (e) {
+						return { parent: e.id };
+					}
+				}
+			},
+			plugins: ["checkbox"]
+		});
+
+		$("#m_tree_6").on("select_node.jstree", function (e, data) {
+			currentSelectedKeywords = [];
+			if ($('#m_tree_6').jstree(true).get_parent(data.node) == "#") {
+				$("#btnDeleteRootCategory").removeClass("d-none");
+				$("#btnEditRootCategory").removeClass("d-none");
+			} else {
+				$("#btnDeleteSubCategory").removeClass("d-none");
+				$("#btnEditSubCategory").removeClass("d-none");
+				$("#btnCreateKeyword").removeClass("d-none");
+				$("#selectedCategory").val(data.node.id);
+			}
+			$("#parentId").val(data.node.id)
+			$("#parentName").val(data.node.text)
+			$("#btnCreateSubCategory").removeClass("d-none");
+			$("#deleteId").val(data.node.id)
+			$("#updateCategoryId").val(data.node.id)
+			$("#updateCategoryName").val(data.node.text)
+			$("#deletedCategoryName").text(data.node.text)
+			$("#updateDescription").val(null)
+
+			showKeyDetails(data.node);
+			showKeywords();
+		}).jstree();
+		$("#m_tree_6").on("deselect_node.jstree", function (e, data) {
+			if ($('#m_tree_6').jstree(true).get_parent(data.node) == "#") {
+				$("#btnDeleteRootCategory").addClass("d-none");
+				$("#btnEditRootCategory").addClass("d-none");
+			}
+			$("#btnDeleteSubCategory").addClass("d-none");
+			$("#btnEditSubCategory").addClass("d-none");
+			$("#selectedCategory").val(null);
+			$("#btnCreateSubCategory").addClass("d-none");
+			$("#btnCreateKeyword").addClass("d-none");
+			$("#btnEditKeyword").addClass("d-none");
+			$("#btnDeleteKeyword").addClass("d-none");
+			$("#deleteId").val(null)
+			$("#updateCategoryId").val(null)
+			$("#updateCategoryName").val(null)
+			$("#updateDescription").val(null)
+			$("#parentId").val(null)
+			$("#parentName").val(null)
+			$("#keyword-group-key").empty();
+			$("#keyword-group-name").empty();
+			showKeywords();
+		}).jstree();
+
+		$('#btnCreateRootCategory').click(function () {
+			$('#depthLevel').val(0);
+			$('#parentId').val(null);
+			$('#parentNameDiv').addClass("d-none")
+		});
+		$('#btnCreateSubCategory').click(function () {
+			$('#parentNameDiv').removeClass("d-none")
+		});
+		$(document).on('change', '.keyword', function () {
+			var ignoreIndex = ignoreKeyword.indexOf($(this).val());
+			var currIndex = currentSelectedKeywords.indexOf($(this).val());
+			if ($(this).is(":checked")) {
+				if (ignoreIndex > -1) {
+					ignoreKeyword.splice(ignoreIndex, 1);					
+				}
+				if (currIndex == -1) {
+					currentSelectedKeywords.push($(this).val());
+				}
+			} else {
+				$('#checkAll').prop('checked', false);
+				if (ignoreIndex == -1) {
+					ignoreKeyword.push($(this).val());
+				}
+				if (currIndex > -1) {
+					currentSelectedKeywords.splice(currIndex, 1);
+				}
+			}
+			if (currentSelectedKeywords.length > 0) {
+				$("#btnEditKeyword").removeClass('d-none');
+				$("#btnDeleteKeyword").removeClass('d-none');
+			} else {
+				$("#btnEditKeyword").addClass('d-none');
+				$("#btnDeleteKeyword").addClass('d-none');
+			}
+			showKeywords();
+		})
+
+		$("#btnDeleteKeyword").click(function () {
+			var checkedList = $(".keyword:checked");
+			var deletedKewordHtml = "";
+			$.each(checkedList, function (i, v) {
+				deletedKewordHtml += '<li>' + $(v).parent().text().trim() + '</li>'
+			})
+			$('#deletedKeywords').html(deletedKewordHtml);
+		});
+
+		$("#btnEditKeyword").click(function () {
+			var checkedList = $(".keyword:checked");
+			var editKewordHtml = [];
+			$.each(checkedList, function (i, v) {
+				editKewordHtml.push('<div class="inputEditKeyword row"><input class="d-none inputEditId" value="' + $(v).val() + '"/>' +
+					'<input  type="text" class="form-control m-input inputEditKeywordTxt" value="' +
+					$(v).parent().text().trim() + '"/></div>');
+			})
+			$('#divEditedKeywords').html(editKewordHtml.join('</br>'));
+		});
+
+		$(document).on('change', '#checkAll', function () {
+			var c = this.checked;
+			$('.keyword').prop('checked', c);
+			var checkedList = $(".keyword");
+			currentSelectedKeywords = [];
+			$.each(checkedList, function (i, v) {
+				var index = ignoreKeyword.indexOf($(v).val());
+				if (c) {
+					currentSelectedKeywords.push($(v).val());
+					if (index > -1) {
+						ignoreKeyword.splice(index, 1);
+					}
+				} else {
+					if (index == -1) {
+						ignoreKeyword.push($(this).val());
+					}
+				}
+			})
+
+			if (c) {
+				$("#btnEditKeyword").removeClass('d-none');
+				$("#btnDeleteKeyword").removeClass('d-none');
+			} else {
+				$("#btnEditKeyword").addClass('d-none');
+				$("#btnDeleteKeyword").addClass('d-none');
+			}
+			showKeywords();
+		})
+
+		$("#confirmDeleteKeyword").on("click", function () {
+			var settings = {
+				beforeSend: function (xhr, options) {
+
+					/* Provide csrf token, otherwise backend returns 403. */
+					xhr.setRequestHeader("X-CSRF-TOKEN", [[${ _csrf.token }]]);
+				},
+				type: 'DELETE',
+				url: '/delete-keywords?keywordIds=' + currentSelectedKeywords.join(",")
+			}
+			$.ajax(settings)
+				.done(function (result) {
+					showKeyDetails($('#m_tree_6').jstree(true).get_node($("#selectedCategory").val()));
+					$('#modal-deleted-keywords').modal('hide');
+				})
+				.fail(function (result) {
+					$('#modal-deleted-keywords').modal('hide');
+				});
+		});
+
+		$("#btnConfirmDeleteKeyword").on("click", function () {
+			var data = [];
+			var listEditDiv = $(".inputEditKeyword");
+			$.each(listEditDiv, function (i, v) {
+				var d = {};
+				d.keywordId = $(v).find("input.inputEditId").val();
+				d.keyword = $(v).find("input.inputEditKeywordTxt").val();
+				data.push(d);
+			})
+			var settings = {
+				beforeSend: function (xhr, options) {
+					xhr.setRequestHeader("content-type", "application/json; charset=utf-8");
+					xhr.setRequestHeader("X-CSRF-TOKEN", [[${ _csrf.token }]]);
+				},
+				type: 'PUT',
+				url: '/edit-keywords',
+				data: JSON.stringify(data)
+			}
+			$.ajax(settings)
+				.done(function (result) {
+					showKeyDetails($('#m_tree_6').jstree(true).get_node($("#selectedCategory").val()));
+					$('#modal-edit-keywords').modal('hide');
+				})
+				.fail(function (result) {
+					$('#modal-edit-keywords').modal('hide');
+				});
+		});
+		
+		$("#btnSearchCategory").on('click', function() {
+			search();
+		})
+		
+		
+		function higlight(e){
+			$(e).addClass("highlight");
+		}
+		
+		$('#m_form').on('keyup keypress', function(e) {
+			  var keyCode = e.keyCode || e.which;
+			  if (keyCode === 13) { 
+			    e.preventDefault();
+			    search();
+			    return false;
+			  }
+			});		
+		
+		$('input[name=usedToAdvertise]').change(function(){
+			if ($(this).val() == 'YES') {
+	            $("#more-info").removeClass("d-none")
+	        } else {
+	        	$("#more-info").addClass("d-none")
+	        	$("#previousPartner").val(null)
+	        	$("#quitReason").val(null)
+	        	$("#previousBudget").val(null)
+	        }
+		})
+		
+		$('input[name=usedToAdvertise]').change();
+		$('select').change(function(){
+			console.log("Change");
+			if ($(this).val() == 'other') {
+	            $("#otherApprover").removeClass("d-none")
+	        } else {
+	        	$("#otherApprover").addClass("d-none")
+	        }
+		})
+		$('select').change();
+	});
+		
+
+
+	</script>
+</th:block>
+
+</html>

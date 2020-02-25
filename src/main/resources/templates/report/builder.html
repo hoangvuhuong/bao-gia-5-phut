@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" lang="en"
+	layout:decorate="~{layout/master}">
+<head>
+<title>Report Builder</title>
+</head>
+<body>
+	<!-- /* Content of this page will be decorated by the elements of layout.html (task/layout) */ -->
+	<div layout:fragment="content"
+		class="m-grid__item m-grid__item--fluid m-wrapper">
+		<div class="m-subheader ">
+			<div class="d-flex align-items-center">
+				<div class="mr-auto">
+					<h3 class="m-subheader__title ">New Report</h3>
+				</div>
+				<div></div>
+			</div>
+		</div>
+		<div class="m-content" style="background-color: #F2F3F8 !important;">
+			<div class="row">
+				<div class="col-xl-2">
+					<div class="m-portlet   ">
+						<div class="m-portlet__head m-portlet__body--no-padding">
+							<div class="m-portlet__head-caption">
+								<div class="m-portlet__head-title">
+									<h3 class="m-portlet__head-text">Filters</h3>
+								</div>
+							</div>
+							<div class="m-portlet__head-tools"></div>
+						</div>
+						<form class="m-form m-form--fit m-form--label-align-right">
+							<div class="m-portlet__body ">
+								<div class="form-group m-form__group">
+									<label for="selectObjectType"> Object type </label>
+									<div class="dropdown">
+										<button class="btn btn-secondary col-xl-12 dropdown-toggle"
+											type="button" data-toggle="dropdown" aria-haspopup="true"
+											aria-expanded="true">
+											Invoices <span class="caret float-left"></span>
+										</button>
+										<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+											<li><a href="#" data-value="count_invoice">Invoices</a></li>
+											<li><a href="#" data-value="total_amount">Products</a></li>
+										</ul>
+									</div>
+								</div>
+								<div class="form-group m-form__group">
+									<label for="selectDateProperty"> Date property </label>
+									<div class="dropdown">
+										<button class="btn btn-secondary col-xl-12 dropdown-toggle"
+											type="button" data-toggle="dropdown" aria-haspopup="true"
+											aria-expanded="true">
+											Invoice Date <span class="caret float-left"></span>
+										</button>
+										<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+											<li><a href="#" data-value="count_invoice">Invoice
+													Date</a></li>
+											<li><a href="#" data-value="total_amount">Create
+													Date</a></li>
+										</ul>
+									</div>
+								</div>
+								<div class="form-group m-form__group">
+									<label for="selectDateRange"> Date range </label>
+									<div class="dropdown">
+										<button class="btn btn-secondary col-xl-12 dropdown-toggle"
+											type="button" data-toggle="dropdown" aria-haspopup="true"
+											aria-expanded="true">
+											Today <span class="caret float-left"></span>
+										</button>
+										<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+											<li><a href="#" data-value="count_invoice">Today</a></li>
+											<li><a href="#" data-value="total_amount">Yesterday</a></li>
+											<li><a href="#" data-value="total_amount">This week</a></li>
+											<li><a href="#" data-value="total_amount">Last week</a></li>
+										</ul>
+									</div>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+				<div class="col-xl-10">
+					<div class="m-portlet  ">
+						<div class="m-portlet__head m-portlet__body--no-padding">
+							<div class="m-portlet__head-caption">
+								<div class="m-portlet__head-title">
+									<h3 class="m-portlet__head-text">Measures</h3>
+								</div>
+							</div>
+							<div class="m-portlet__head-tools"></div>
+						</div>
+
+						<div class="m-portlet__body  ">
+							<div class="dropdown">
+								<button class="btn btn-secondary col-xl-4 dropdown-toggle"
+									type="button" data-toggle="dropdown" aria-haspopup="true"
+									aria-expanded="true">
+									Count of Invoices <span class="caret float-right"></span>
+								</button>
+								<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+									<li><a href="#" data-value="count_invoice">Count of
+											Invoices</a></li>
+									<li><a href="#" data-value="total_amount">Total Amount</a></li>
+								</ul>
+							</div>
+						</div>
+
+					</div>
+					<div class="m-portlet  ">
+						<div class="m-portlet__head m-portlet__body--no-padding">
+							<div class="m-portlet__head-caption">
+								<div class="m-portlet__head-title">
+									<h3 class="m-portlet__head-text">Visualization</h3>
+								</div>
+							</div>
+							<div class="m-portlet__head-tools">
+								<div class="dropdown" id="dropdownChartType">
+									<button class="btn  dropdown-toggle" type="button"
+										data-toggle="dropdown" aria-haspopup="true"
+										aria-expanded="true">
+										Column <span class="caret"></span>
+									</button>
+									<ul class="dropdown-menu" aria-labelledby="dropdownChartType">
+										<li><a href="javascript:;" data-value="bar">Bar</a></li>
+										<li><a href="javascript:;" data-value="column">Column</a></li>
+										<li class="disabled"><a class="disabled" href="javascript:;" data-value="line">Line</a></li>
+										<li class="disabled"><a href="javascript:;" data-value="area">Area</a></li>
+										<li><a href="javascript:;" data-value="pie">Pie</a></li>
+										<li class="disabled"><a href="javascript:;" data-value="summary">Summary</a></li>
+										<li class="disabled"><a href="javascript:;" data-value="table">Table</a></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+						<div class="m-portlet__body ">
+							<div id="chart" style="height: 400px;"></div>
+						</div>
+					</div>
+					<div class="m-portlet  ">
+						<div class="m-portlet__head m-portlet__body--no-padding">
+							<div class="m-portlet__head-caption">
+								<div class="m-portlet__head-title">
+									<h3 class="m-portlet__head-text">Data</h3>
+								</div>
+							</div>
+							<div class="m-portlet__head-tools"></div>
+						</div>
+						<div class="m-portlet__body "></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</body>
+<th:block layout:fragment="script-block">
+	<script src="http://www.amcharts.com/lib/4/core.js"></script>
+	<script src="http://www.amcharts.com/lib/4/charts.js"></script>
+	<script src="http://www.amcharts.com/lib/4/themes/animated.js"></script>
+
+	<script type="text/javascript">
+	am4core.useTheme(am4themes_animated);
+	var data;
+	$(function(){
+	
+		$(".dropdown-menu li a").click(function(){
+			  $(this).parents(".dropdown").find('.btn').html($(this).text() + ' <span class="caret"></span>');
+			  $(this).parents(".dropdown").find('.btn').val($(this).data('value'));
+			});
+		
+		$("#dropdownChartType .dropdown-menu li a").click(function(){
+			chartType = $(this).attr('data-value');
+			if (chartType == "bar")
+			{
+				buildBarChart();
+			}
+			else if (chartType == "column")
+			{
+				buildColumnChart();
+			}
+			else if (chartType == "pie")
+			{
+				buildPieChart();
+			}
+		});
+		
+		$.ajax({
+			  url: "http://localhost:9400/ui/report/data",
+			  method: "GET"
+			}).done(function(msg) {
+				rawData = JSON.parse(msg);
+				data = [];
+				rawData.aggregations.lifecyclestage.forEach(function(entry) {
+					data.push(flattenObject(entry));
+				    console.log(flattenObject(entry));
+				});
+				rawData = flattenObject(rawData.aggregations.lifecyclestage);
+				buildColumnChart();
+			});
+	
+	});
+	
+	function buildColumnChart() {
+		// Create chart instance
+		
+		var config ={
+			  // Create pie series
+			  "yAxes": [{
+			    "type": "ValueAxis",
+			  }],
+			  "xAxes": [{
+				    "type": "CategoryAxis",
+				    "dataFields": {
+				      "category": "key"
+				    },
+				    "category": "key",
+				  }],
+			  "series": [{
+				  "name": "Hubspot Score",
+				"type": "ColumnSeries",
+			    "dataFields": {
+			    	
+			      "valueY": "metrics.hubspotscore.sum",
+			      "categoryX": "key"
+			    },
+			    "columns": {"tooltipText": "{categoryX}: [bold]{valueY}[/]", "fillOpacity": 0.8},
+			    "bullets": [ {
+			        "type": "LabelBullet",
+			        "label": {
+			          "text": "{valueY}"
+			        },
+			        "dy": -20,
+			      }]
+			    
+			  }],
+	
+			  // Add data
+			  "data": data,
+	
+			  
+			};
+		
+		var chart0 = am4core.createFromConfig(config, "chart", am4charts.XYChart);
+	
+		
+	}
+	
+	function buildBarChart() {
+		// Create chart instance
+	
+		var config =
+		{
+				// Create pie series
+				"xAxes" : [ {
+					"type" : "ValueAxis",
+				} ],
+				"yAxes" : [ {
+					"type" : "CategoryAxis",
+					"dataFields" : {
+						"category" : "key"
+					},
+					"category" : "key",
+				} ],
+				"series" : [ {
+					"name" : "Hubspot Score",
+					"type" : "ColumnSeries",
+					"dataFields" : {
+	
+						"valueX" : "metrics.hubspotscore.sum",
+						"categoryY" : "key"
+					},
+					"columns" : {
+						"tooltipText" : "{categoryY}: [bold]{valueX}[/]",
+						"fillOpacity" : 0.8
+					},
+					"bullets" : [ {
+						"type" : "LabelBullet",
+						"label" : {
+							"text" : "{valueX}"
+						},
+						"dx" : -20,
+					} ]
+	
+				} ],
+	
+				// Add data
+				"data" : data,
+	
+	
+		};
+
+		var chart0 = am4core.createFromConfig(config, "chart",
+				am4charts.XYChart);
+
+	}
+
+	function buildPieChart() {
+		// Create chart instance
+
+		var config = {
+
+			// Add data
+			"data" : data,
+
+			// Create and configure Series
+			"series" : [ {
+				"type" : "PieSeries",
+				"dataFields" : {
+					"value" : "metrics.hubspotscore.sum",
+					"category" : "key"
+				}
+			} ]
+		};
+
+		var chart = am4core.createFromConfig(config, "chart",
+				am4charts.PieChart);
+
+	}
+
+	var flattenObject = function(ob) {
+		var toReturn = {};
+
+		for ( var i in ob) {
+			if (!ob.hasOwnProperty(i))
+				continue;
+
+			if ((typeof ob[i]) == 'object') {
+				var flatObject = flattenObject(ob[i]);
+				for ( var x in flatObject) {
+					if (!flatObject.hasOwnProperty(x))
+						continue;
+
+					toReturn[i + '.' + x] = flatObject[x];
+				}
+			} else {
+				toReturn[i] = ob[i];
+			}
+		}
+		return toReturn;
+	};
+</script>
+
+</th:block>
+</html>

@@ -1,0 +1,1069 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" lang="vi"
+	layout:decorate="~{layout/master}">
+
+<head>
+<title>Tạo báo giá bước 1</title>
+
+<style type="text/css">
+.highlight {
+	font-weight: bold;
+	font-size: larger;
+	color: blue !important;
+	
+}
+.m-portlet .m-portlet__head {
+   
+    position: sticky;
+    top: 0;
+   	background: white;
+    z-index: 3;
+}
+
+
+</style>
+</head>
+
+<body>
+	<!-- /* Content of this page will be decorated by the elements of layout.html (task/layout) */ -->
+	<div layout:fragment="content">
+		<div class="row" sec:authorize="hasAnyRole('ADMIN', 'SYS_ADMIN')">
+			<div class="col-lg-6 mb-2">
+				<button type="button" class="btn btn-success" data-toggle="modal"
+					data-target="#modal-import-data" id="btnImportData">Import
+					Dữ Liệu</button>
+				<button type="button" class="btn btn-success" data-toggle="modal"
+					data-target="#modal-import-gg-sheet" id="btnImportGgSheet">Import
+					Từ Google Sheet</button>
+				<button type="button" class="btn btn-success" data-toggle="modal"
+					data-target="#modal-create-category" id="btnCreateRootCategory">Tạo
+					Danh Mục Gốc</button>
+
+				<button type="button" class="btn btn-warning d-none edit-category"
+					data-toggle="modal" data-target="#modal-update-category"
+					id="btnEditRootCategory">Sửa Danh Mục Gốc</button>
+
+				<button type="button" class="btn btn-danger d-none"
+					data-toggle="modal" data-target="#modal-delete-category"
+					id="btnDeleteRootCategory">Xóa Danh Mục Gốc</button>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-lg-6">
+				<!--begin::Portlet-->
+				<div class="m-portlet" style="height: 750px; overflow-y: auto;">
+					<div class="m-portlet__head" >
+						<div class="m-portlet__head-caption">
+							<div class="m-portlet__head-title">
+								<h3 class="m-portlet__head-text">Danh mục</h3>
+							</div>
+						</div>
+						<div class="m-portlet__head-tools">
+							<ul class="m-portlet__nav"
+								sec:authorize="hasAnyRole('ADMIN', 'TECHNICIAN', 'SYS_ADMIN')">
+								<li class="m-portlet__nav-item">
+									<button type="button" class="btn btn-success d-none"
+										data-toggle="modal" data-target="#modal-create-category"
+										id="btnCreateSubCategory">Thêm</button>
+								</li>
+								<li class="m-portlet__nav-item">
+									<button type="button"
+										class="btn btn-warning d-none edit-category"
+										data-toggle="modal" data-target="#modal-update-category"
+										id="btnEditSubCategory">Sửa</button>
+								</li>
+								<li class="m-portlet__nav-item">
+									<button type="button" class="btn btn-danger d-none"
+										data-toggle="modal" data-target="#modal-delete-category"
+										id="btnDeleteSubCategory">Xóa</button>
+								</li>
+							</ul>
+						</div>
+					</div>
+					<div class="m-portlet__body">
+						<div class="row">
+							<div class="input-group col-lg-9 col-md-9 col-sm-12 pb-4">
+								<input type="text" class="form-control kt-quick-search__input"
+									id="searchCategory" placeholder="Tìm kiếm...">
+								<button id="btnSearchCategory" class="btn btn-secondary">
+									<i class="flaticon-search-1"></i>
+								</button>
+							</div>
+						</div>
+
+						<div id="m_tree_6" class="tree-demo"></div>
+					</div>
+				</div>
+
+				<!--end::Portlet-->
+			</div>
+			<div class="col-lg-6">
+
+				<!--begin::Portlet-->
+				<div class="m-portlet" style="height: 750px; overflow-y: auto;"
+					id="startToScroll">
+					<div class="m-portlet__head" >
+						<div class="m-portlet__head-caption">
+							<div class="m-portlet__head-title">
+								<span class="m-portlet__head-icon"> <i
+									class="flaticon-search"></i>
+								</span>
+								<h3 class="m-portlet__head-text" id="keyword-group-name">
+									<small>Cụm từ khóa</small>
+								</h3>
+							</div>
+						</div>
+						<div class="m-portlet__head-tools">
+							<ul class="m-portlet__nav">
+								<li class="m-portlet__nav-item"><a href="#"
+									onclick="showKeywords()"
+									class="m-portlet__nav-link btn btn-light m-btn m-btn--pill m-btn--air btn-outline-info"
+									data-toggle="modal" data-target="#modal-keydetails-view">
+										Từ khóa đã chọn </a></li>
+								<li class="m-portlet__nav-item"
+									sec:authorize="hasAnyRole('ADMIN', 'TECHNICIAN', 'SYS_ADMIN')">
+									<button type="button" class="btn btn-success d-none"
+										id="btnCreateKeyword">Thêm</button>
+								</li>
+								<li class="m-portlet__nav-item"
+									sec:authorize="hasAnyRole('ADMIN', 'TECHNICIAN', 'SYS_ADMIN')">
+									<button type="button" class="btn btn-warning d-none"
+										id="btnEditKeyword" data-toggle="modal"
+										data-target="#modal-edit-keywords">Sửa</button>
+								</li>
+								<li class="m-portlet__nav-item"
+									sec:authorize="hasAnyRole('ADMIN', 'TECHNICIAN', 'SYS_ADMIN')">
+									<button type="button" class="btn btn-danger d-none"
+										id="btnDeleteKeyword" data-toggle="modal"
+										data-target="#modal-deleted-keywords">Xóa</button>
+								</li>
+							</ul>
+						</div>
+					</div>
+					<div class="m-portlet__body">
+						<div class="m-checkbox-list" id="keyword-group-key"></div>
+						<div class="form-group m-form__group pt-sm-2 d-none"
+							id="divAddKeywords">
+							<input class="d-none" id="selectedCategory" />
+							<textarea class="form-control m-input" id="txtAddKeywords"
+								rows="10"
+								placeholder="**Các từ khóa phân cách nhau bằng dấu xuống dòng"></textarea>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-primary"
+									onclick="addKeywords()">Lưu</button>
+								<button type="button" class="btn btn-secondary"
+									onclick="cancelAddKeywords()">Hủy</button>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!--end::Portlet-->
+			</div>
+		</div>
+
+		<!--begin::Modal-->
+		<div class="modal fade" id="modal-keydetails-view" tabindex="-1"
+			role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">Danh sách từ
+							khóa</h5>
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<div class="form-group m-form__group">
+							<p>
+								Tổng số từ đã chọn: <b id="numOfKeyword"></b>
+							</p>
+						</div>
+						<div class="form-group m-form__group">
+							<textarea class="form-control m-input" id="keyworld-list"
+								rows="18"></textarea>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary"
+							data-dismiss="modal">Đóng</button>
+						<button type="button" class="btn btn-primary"
+							onclick="copyKeywords()">Sao chép & Đóng</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!--end::Modal-->
+
+		<div class="modal fade" id="modal-delete-category" tabindex="-1"
+			role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">Xóa danh mục</h5>
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<input id="deleteId" class="d-none" />
+						<div class="form-group m-form__group">
+							Bạn có muốn xóa danh mục <b id="deletedCategoryName"
+								style="color: red"></b> và tất cả các thư mục con của nó!
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" id="confirmDelete">Tiếp
+							tục</button>
+						<button type="button" class="btn btn-primary" data-dismiss="modal">Hủy</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="modal fade" id="modal-deleted-keywords" tabindex="-1"
+			role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">Xóa từ khóa</h5>
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<input id="deletedKeywordId" class="d-none" />
+						<div class="form-group m-form__group">
+							Bạn có muốn xóa những từ khóa này?
+							<ul id="deletedKeywords"></ul>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary"
+							id="confirmDeleteKeyword">Tiếp tục</button>
+						<button type="button" class="btn btn-primary" data-dismiss="modal">Hủy</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="modal fade" id="modal-edit-keywords" tabindex="-1"
+			role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">Sửa từ khóa</h5>
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<div id="divEditedKeywords"></div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-primary"
+							id="btnConfirmDeleteKeyword">Tiếp tục</button>
+						<button type="button" class="btn btn-secondary"
+							data-dismiss="modal">Hủy</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="modal fade" id="modal-import-data" tabindex="-1"
+			role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">Import data từ
+							file excel</h5>
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<form class="m-form m-form--fit m-form--label-align-right"
+							id="formImport" enctype="multipart/form-data">
+							<div class="m-portlet__body">
+								<div class="form-group m-form__group m--margin-top-10">
+									<div class="alert m-alert m-alert--default" role="alert">
+										Chọn file để import dữ liệu. File có định dạng excel(.xlsx)
+										với format cho sẵn.</div>
+								</div>
+								<div class="form-group m-form__group">
+									<div>
+										<input type="file" id="customFile">
+									</div>
+								</div>
+							</div>
+							<div class="m-portlet__foot m-portlet__foot--fit">
+								<div class="m-form__actions">
+									<button type="button" class="btn btn-primary"
+										onclick="importData()">Import</button>
+									<button type="reset" class="btn btn-secondary"
+										data-dismiss="modal">Hủy</button>
+								</div>
+							</div>
+						</form>
+					</div>
+					<div class="modal-footer"></div>
+				</div>
+			</div>
+		</div>
+
+		<div class="modal fade" id="modal-import-gg-sheet" tabindex="-1"
+			role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">Import data từ
+							google sheet</h5>
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<div class="m-portlet__body">
+							<div class="form-group m-form__group" id="parentNameDiv">
+								<label for="category">Địa chỉ google sheet</label><input
+									type="text" class="form-control m-input m-input--air"
+									id="sheetUrl" />
+							</div>
+						</div>
+						<div class="m-portlet__foot m-portlet__foot--fit">
+							<div class="m-form__actions">
+								<button class="btn btn-primary" onclick="importGgSheet()">Import</button>
+								<button type="reset" class="btn btn-secondary"
+									data-dismiss="modal">Hủy</button>
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer"></div>
+				</div>
+			</div>
+		</div>
+
+		<!--begin::Modal-->
+		<div class="modal fade" id="modal-create-category" tabindex="-1"
+			role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">Tạo thư mục
+							mới:</h5>
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<form class="m-form m-form--fit m-form--label-align-right"
+							id="form-category">
+							<div class="m-portlet__body">
+								<div class="form-group m-form__group d-none" id="parentNameDiv">
+									<label for="category">Danh mục cha</label><input type="text"
+										class="form-control m-input m-input--air" disabled
+										id="parentName" name="parentName" />
+								</div>
+								<div class="form-group m-form__group">
+									<label for="category">Tên danh mục</label> <input type="text"
+										class="form-control m-input m-input--air" id="categoryName"
+										name="categoryName" placeholder="Ngành">
+								</div>
+								<div class="form-group m-form__group">
+									<label for="description">Mô Tả</label>
+									<textarea class="form-control m-input m-input--air"
+										id="description" name="description" rows="3"></textarea>
+								</div>
+								<div class="form-group m-form__group d-none">
+									<input type="text" class="form-control m-input m-input--air"
+										id="parentId" name="parentId" />
+								</div>
+								<div class="form-group m-form__group d-none">
+									<input type="text" class="form-control m-input m-input--air"
+										id="depthLevel" name="depthLevel" />
+								</div>
+							</div>
+							<div class="m-portlet__foot m-portlet__foot--fit">
+								<div class="m-form__actions">
+									<button type="submit" class="btn btn-accent">Tạo mới</button>
+									<button type="reset" class="btn btn-secondary"
+										data-dismiss="modal">Hủy</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="modal fade" id="modal-update-category" tabindex="-1"
+			role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">Cập nhật danh
+							mục:</h5>
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<form class="m-form m-form--fit m-form--label-align-right"
+							id="update-form-category">
+							<div class="m-portlet__body">
+								<div class="form-group m-form__group">
+									<label for="category">Tên danh mục</label> <input type="text"
+										class="form-control m-input m-input--air"
+										id="updateCategoryName" name="categoryName"
+										placeholder="Ngành">
+								</div>
+								<div class="form-group m-form__group">
+									<label for="description">Mô Tả</label>
+									<textarea class="form-control m-input m-input--air"
+										id="updateDescription" name="description" rows="3"></textarea>
+								</div>
+								<div class="form-group m-form__group d-none">
+									<input type="text" class="form-control m-input m-input--air"
+										id="updateCategoryId" />
+								</div>
+							</div>
+							<div class="m-portlet__foot m-portlet__foot--fit">
+								<div class="m-form__actions">
+									<button type="submit" class="btn btn-accent">Cập nhật</button>
+									<button type="reset" class="btn btn-secondary"
+										data-dismiss="modal">Hủy</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!--end::Modal-->
+		<div class="modal fade" id="modal-error" tabindex="-1" role="dialog"
+			aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">Oop!</h5>
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<input id="deleteId" class="d-none" />
+						<div class="form-group m-form__group" style="color: red">Có
+							lỗi xảy ra!</div>
+						<b id="errorMessage"></b>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+<th:block layout:fragment="script-block">
+	<script th:src="@{/resources/js/jquery.timeago.js}"
+		type="text/javascript">
+	</script>
+	<script th:inline="javascript">
+		/*<![CDATA[*/
+
+		var strJSONArray = /*[[${classes}]]*/ '';
+		var dataJSONArray = JSON.parse(strJSONArray);
+
+		/*]]>*/
+	</script>
+	<script th:inline="javascript">
+		var FormControls = {
+			init: function () {
+				$("#form-category").validate({
+					rules: {
+						categoryName: { required: !0 }
+					},
+					submitHandler: function (e) {
+						performPost(e);
+					}
+				});
+
+				$("#update-form-category").validate({
+					rules: {
+						updateCategoryName: { required: !0 }
+					},
+					submitHandler: function (e) {
+						performPut(e);
+					}
+				});
+			}
+		}
+		var performPost = function (e) {
+
+			/* Prepare data that have to be send */
+			var data = {};
+			data.categoryName = $('#categoryName').val();
+			data.description = $('#description').val();
+			data.depthLevel = $('#depthLevel').val();
+			data.parentId = $('#parentId').val();
+
+			/* Prepare ajax post settings */
+			var settings = {
+
+				/* Set proper headers before send */
+				beforeSend: function (xhr, options) {
+
+					/* Provide csrf token, otherwise backend returns 403. */
+					xhr.setRequestHeader("X-CSRF-TOKEN", [[${ _csrf.token }]]);
+
+					/* Send json content */
+					xhr.setRequestHeader("content-type", "application/json; charset=utf-8");
+				},
+				type: 'POST',
+				url: [[ @{/categories} ]],
+				data: JSON.stringify(data)
+			}
+
+			/* Send request to backend with above settings and provide success callback */
+			$.ajax(settings)
+				.done(function (result) {
+					location.reload();
+				})
+				.fail(function (result) {
+					location.reload();
+				});
+		}
+
+		var importData = function () {
+			var data = new FormData();
+			data.append("fileDatas", jQuery('#customFile')[0].files[0]);
+
+			$.ajax({
+				type: "POST",
+				enctype: 'multipart/form-data',
+				url: "/import-data",
+				data: data,
+				beforeSend: function (xhr, options) {
+					xhr.setRequestHeader("X-CSRF-TOKEN", [[${ _csrf.token }]]);
+				},
+                processData: false,
+				contentType: false,
+				cache: false,
+				timeout: 600000,
+				success: function (data) {
+					$('#modal-import-data').modal('hide');
+					alert("Import file thành công! F5 trang web để xem từ khóa đã được import!");
+					
+				},
+				error: function (e) {
+					console.log(e);
+					
+					$('#modal-import-data').modal('hide');
+					$("#errorMessage").text("Lỗi file import gửi lên");
+					$('#modal-error').modal('show');
+					
+				}
+			});
+		}
+		
+		var importGgSheet = function () {
+	
+			$.ajax({
+				type: "GET",
+				url: "/import-google-sheet?url=" + $("#sheetUrl").val(),
+				beforeSend: function (xhr, options) {
+					if([[${googleLoginUrl}]]){
+						window.open([[${googleLoginUrl}]], '_blank');
+					}
+					xhr.setRequestHeader("X-CSRF-TOKEN", [[${ _csrf.token }]]);
+				},
+				success: function (data) {
+					location.reload();
+				},
+				error: function (e) {
+					location.reload();
+				}
+			});
+		}
+
+		var performPut = function (e) {
+
+			/* Prepare data that have to be send */
+			var data = {};
+			data.categoryName = $('#updateCategoryName').val();
+			data.description = $('#updateDescription').val();
+			data.categoryId = $("#updateCategoryId").val();
+
+			/* Prepare ajax post settings */
+			var settings = {
+
+				/* Set proper headers before send */
+				beforeSend: function (xhr, options) {
+
+					/* Provide csrf token, otherwise backend returns 403. */
+					xhr.setRequestHeader("X-CSRF-TOKEN", [[${ _csrf.token }]]);
+
+					/* Send json content */
+					xhr.setRequestHeader("content-type", "application/json; charset=utf-8");
+				},
+				type: 'PUT',
+				url: [[ @{/categories} ]],
+				data: JSON.stringify(data)
+			}
+	
+			/* Send request to backend with above settings and provide success callback */
+			$.ajax(settings)
+				.done(function (result) {
+					location.reload();
+				})
+				.fail(function (result) {
+					location.reload();
+				});
+       	}
+
+		var performDelete = function () {
+			var id = $("#deleteId").val();
+			var settings = {
+				beforeSend: function (xhr, options) {
+
+					/* Provide csrf token, otherwise backend returns 403. */
+					xhr.setRequestHeader("X-CSRF-TOKEN", [[${ _csrf.token }]]);
+				},
+				type: 'DELETE',
+				url: [[ @{/categories} ]] + "/" + id
+			}
+			$.ajax(settings)
+				.done(function (result) {
+					location.reload();
+				})
+				.fail(function (result) {
+					console.log(result);
+				});
+		}
+
+		var showKeyDetails = function (e) {
+			var id = e.id;
+			if (id != null) {
+				$.ajax({
+					type: 'GET',
+					url: '/list-keywords?categoryIds=' + id
+				})
+					.done(function (result) {
+						currentSelectedKeywords = []
+						if (result != null && result.length > 0) {
+							var innerHtml = ['<div class="row"><div class="col m--align-left"><label class="m-checkbox m-checkbox--primary mb-sm-3">' +
+								'<input type="checkbox" id="checkAll" checked>&nbsp;<span></span></label></div>' +
+								'</div>'];
+							
+							$.each(result, function (index, value) {
+								var checked = '';
+								if ($.inArray(value.keywordId, ignoreKeyword) == -1) {
+									currentSelectedKeywords.push(value.keywordId);
+									checked = 'checked';
+								}
+								innerHtml.push('<div class="row bg-light">' +
+									'<div class="col m--align-left"><label class="m-checkbox m-checkbox--primary"> <input class="keyword" type="checkbox" ' +
+									checked + ' value="' +
+									value.keywordId + '">' +
+									value.keyword + '<span>  </span></div>' +
+									'</div>');
+							})
+							$("#keyword-group-key").html(innerHtml.join('<hr>'));
+							$("#keyword-group-name").html(e.text);
+							if(currentSelectedKeywords.length > 0){
+								$("#btnEditKeyword").removeClass("d-none");
+								$("#btnDeleteKeyword").removeClass("d-none");
+							}
+						} else {
+							$("#keyword-group-key").html(null);
+							$("#keyword-group-name").html(e.text);
+						}
+					})
+					.fail(function (result) {
+						$("#keyword-group-key").html(null);
+						$("#keyword-group-name").html(e.text);
+					});
+			}
+		}
+
+		var copyKeywords = function () {
+			$('#modal-keydetails-view').modal('hide');
+			copyKeywordsToClipboard();
+		}
+
+		var copyKeywordsToClipboard = function () {
+			var copyTest = document.queryCommandSupported('copy');
+
+			if (copyTest === true) {
+				var copyTextArea = document.getElementById("keyworld-list");
+				copyTextArea.select();
+				try {
+					var successful = document.execCommand('copy');
+					var msg = successful ? 'Copied!' : 'Whoops, not copied!';
+				} catch (err) {
+					console.log('Oops, unable to copy');
+				}
+				document.body.removeChild(copyTextArea);
+			} else {
+				// Fallback if browser doesn't support .execCommand('copy')
+				window.prompt("Copy to clipboard: Ctrl+C or Command+C, Enter", text);
+			}
+		}
+
+		var showKeywords = function () {
+			var r = $("#m_tree_6").jstree("get_selected");
+
+			$.ajax({
+				type: 'GET',
+				url: '/all-keywords?categoryIds=' + r.join(",")
+			})
+				.done(function (result) {
+					var listKeywords = [];
+					$.each(result, function (i, v) {
+						var index = ignoreKeyword.indexOf(v.keywordId);
+						if (index == -1) {
+							listKeywords.push(v.keyword);
+						}
+					})
+					$("#numOfKeyword").text(listKeywords.length);
+					$("#keyworld-list").html(listKeywords.join("\n"));
+				})
+				.fail(function (result) {
+				});
+		}
+
+		var cancelAddKeywords = function () {
+			$("#divAddKeywords").addClass("d-none")
+			$("#txtAddKeywords").val("");
+		}
+
+		var addKeywords = function () {
+			var strKeyword = $("#txtAddKeywords").val().trim();
+			if (strKeyword != null && strKeyword != "") {
+				var data = {}
+				data.categoryId = $("#selectedCategory").val();
+				data.keywords = strKeyword.split("\n")
+				$.ajax({
+					beforeSend: function (xhr, options) {
+						xhr.setRequestHeader("X-CSRF-TOKEN", [[${ _csrf.token }]]);
+						xhr.setRequestHeader("content-type", "application/json; charset=utf-8");
+					},
+					type: 'POST',
+					url: '/add-keywords',
+					data: JSON.stringify(data)
+				}).done(function (result) {
+					showKeyDetails($('#m_tree_6').jstree(true).get_node(data.categoryId))
+				}).fail(function (err) {
+				});
+			}
+			cancelAddKeywords();
+		}
+		
+		var search = function(){
+			var str = $('#searchCategory').val();
+			$("#m_tree_6").jstree("close_all");
+			 $.each($(".jstree-anchor"), function(j, v){
+				$("#m_tree_6").jstree(true).show_node($(v).attr('id'));	
+			}); 
+			if(str == null || str == ""){
+				$("#m_tree_6").jstree(true).refresh();
+				return;
+			}
+			$.ajax({
+				beforeSend: function (xhr, options) {
+					xhr.setRequestHeader("X-CSRF-TOKEN", [[${ _csrf.token }]]);
+				},
+				
+				type: 'GET',
+				url: '/categories?str=' + str
+			}).done(function (result) {	
+				
+				if(result == null || result.length == 0){
+					return;
+				}
+				openNode(result);
+			}).fail(function (err) {
+			});
+		}
+		
+		var openNode = function(ids){
+			var elements = $(".jstree-anchor");
+			
+			for(var i = 0; i < elements.length; i++){
+				var id = $(elements[i]).attr('id').replace("_anchor", "");
+				
+				if(ids.indexOf(id) <= -1 && ids.indexOf($('#m_tree_6').jstree(true).get_parent($("#m_tree_6").jstree(true).get_node($(elements[i]).attr('id'))))<=-1  ){
+					/* $("#m_tree_6").jstree(true).close_node($(elements[i]).attr('id')); */
+					$("#m_tree_6").jstree(true).hide_node($(elements[i]).attr('id'));
+				} else {
+					
+					$("#m_tree_6").jstree(true).open_node($(elements[i]).attr('id'), function (e, data) {
+						
+						if(data){
+							
+							openNode(ids);
+							
+						
+						}
+						
+					}); 
+					}
+				}
+			}
+
+		jQuery(document).ready(function () {
+			FormControls.init();
+			ignoreKeyword = [];
+			currentSelectedKeywords = [];
+			roles = $("#role").text().replace("[", "").replace("]", "").trim().split(",");
+			$("#confirmDelete").on("click", function () {
+				performDelete();
+			});
+
+			$(".edit-category").on("click", function () {
+				var id = $("#updateCategoryId").val();
+				$.ajax({
+					type: 'GET',
+					url: [[ @{/categories} ]] + "/" + id
+			}).done(function (result) {
+				$("#updateDescription").val(result.description);
+			})
+				.fail(function (result) {
+				});
+		});
+
+		$("#m_tree_6").jstree({
+			core: {
+				themes: { responsive: !1 },
+				check_callback: !0,
+				data: {
+					url: function (e) {
+						//return "https://keenthemes.com/metronic/themes/themes/metronic/dist/preview/inc/api/jstree/ajax_data.php";
+						return "/categories";
+					},
+					data: function (e) {
+						return { parent: e.id };
+					}
+				}
+			},
+			plugins: ["checkbox"]
+		});
+
+		$("#m_tree_6").on("select_node.jstree", function (e, data) {
+			currentSelectedKeywords = [];
+			if ($('#m_tree_6').jstree(true).get_parent(data.node) == "#") {
+				$("#btnDeleteRootCategory").removeClass("d-none");
+				$("#btnEditRootCategory").removeClass("d-none");
+			} else {
+				$("#btnDeleteSubCategory").removeClass("d-none");
+				$("#btnEditSubCategory").removeClass("d-none");
+				$("#btnCreateKeyword").removeClass("d-none");
+				$("#selectedCategory").val(data.node.id);
+			}
+			$("#parentId").val(data.node.id)
+			$("#parentName").val(data.node.text)
+			$("#btnCreateSubCategory").removeClass("d-none");
+			$("#deleteId").val(data.node.id)
+			$("#updateCategoryId").val(data.node.id)
+			$("#updateCategoryName").val(data.node.text)
+			$("#deletedCategoryName").text(data.node.text)
+			$("#updateDescription").val(null)
+			cancelAddKeywords();
+
+			showKeyDetails(data.node);
+		}).jstree();
+		$("#m_tree_6").on("deselect_node.jstree", function (e, data) {
+			if ($('#m_tree_6').jstree(true).get_parent(data.node) == "#") {
+				$("#btnDeleteRootCategory").addClass("d-none");
+				$("#btnEditRootCategory").addClass("d-none");
+			}
+			$("#btnDeleteSubCategory").addClass("d-none");
+			$("#btnEditSubCategory").addClass("d-none");
+			$("#selectedCategory").val(null);
+			$("#btnCreateSubCategory").addClass("d-none");
+			$("#btnCreateKeyword").addClass("d-none");
+			$("#btnEditKeyword").addClass("d-none");
+			$("#btnDeleteKeyword").addClass("d-none");
+			$("#deleteId").val(null)
+			$("#updateCategoryId").val(null)
+			$("#updateCategoryName").val(null)
+			$("#updateDescription").val(null)
+			$("#parentId").val(null)
+			$("#parentName").val(null)
+			$("#keyword-group-key").empty();
+			$("#keyword-group-name").empty();
+			cancelAddKeywords();
+		}).jstree();
+
+		$('#btnCreateRootCategory').click(function () {
+			$('#depthLevel').val(0);
+			$('#parentId').val(null);
+			$('#parentNameDiv').addClass("d-none")
+		});
+		$('#btnCreateSubCategory').click(function () {
+			$('#parentNameDiv').removeClass("d-none")
+		});
+		$(document).on('change', '.keyword', function () {
+			var ignoreIndex = ignoreKeyword.indexOf($(this).val());
+			var currIndex = currentSelectedKeywords.indexOf($(this).val());
+			if ($(this).is(":checked")) {
+				if (ignoreIndex > -1) {
+					ignoreKeyword.splice(ignoreIndex, 1);					
+				}
+				if (currIndex == -1) {
+					currentSelectedKeywords.push($(this).val());
+				}
+			} else {
+				$('#checkAll').prop('checked', false);
+				if (ignoreIndex == -1) {
+					ignoreKeyword.push($(this).val());
+				}
+				if (currIndex > -1) {
+					currentSelectedKeywords.splice(currIndex, 1);
+				}
+			}
+			if (currentSelectedKeywords.length > 0) {
+				$("#btnEditKeyword").removeClass('d-none');
+				$("#btnDeleteKeyword").removeClass('d-none');
+			} else {
+				$("#btnEditKeyword").addClass('d-none');
+				$("#btnDeleteKeyword").addClass('d-none');
+			}
+		})
+		$("#btnCreateKeyword").click(function () {
+			$("#divAddKeywords").removeClass("d-none")
+			$("#txtAddKeywords").val("");
+			$("#txtAddKeywords").focus();
+			$('#startToScroll').animate({
+		        scrollTop: $("#divAddKeywords").offset().top
+		    }, 'slow');
+		});
+
+		$("#btnDeleteKeyword").click(function () {
+			var checkedList = $(".keyword:checked");
+			var deletedKewordHtml = "";
+			$.each(checkedList, function (i, v) {
+				deletedKewordHtml += '<li>' + $(v).parent().text().trim() + '</li>'
+			})
+			$('#deletedKeywords').html(deletedKewordHtml);
+		});
+
+		$("#btnEditKeyword").click(function () {
+			var checkedList = $(".keyword:checked");
+			var editKewordHtml = [];
+			$.each(checkedList, function (i, v) {
+				editKewordHtml.push('<div class="inputEditKeyword row"><input class="d-none inputEditId" value="' + $(v).val() + '"/>' +
+					'<input  type="text" class="form-control m-input inputEditKeywordTxt" value="' +
+					$(v).parent().text().trim() + '"/></div>');
+			})
+			$('#divEditedKeywords').html(editKewordHtml.join('</br>'));
+		});
+
+		$(document).on('change', '#checkAll', function () {
+			var c = this.checked;
+			$('.keyword').prop('checked', c);
+			var checkedList = $(".keyword");
+			currentSelectedKeywords = [];
+			$.each(checkedList, function (i, v) {
+				var index = ignoreKeyword.indexOf($(v).val());
+				if (c) {
+					currentSelectedKeywords.push($(v).val());
+					if (index > -1) {
+						ignoreKeyword.splice(index, 1);
+					}
+				} else {
+					if (index == -1) {
+						ignoreKeyword.push($(this).val());
+					}
+				}
+			})
+
+			if (c) {
+				$("#btnEditKeyword").removeClass('d-none');
+				$("#btnDeleteKeyword").removeClass('d-none');
+			} else {
+				$("#btnEditKeyword").addClass('d-none');
+				$("#btnDeleteKeyword").addClass('d-none');
+			}
+		})
+
+		$("#confirmDeleteKeyword").on("click", function () {
+			var settings = {
+				beforeSend: function (xhr, options) {
+
+					/* Provide csrf token, otherwise backend returns 403. */
+					xhr.setRequestHeader("X-CSRF-TOKEN", [[${ _csrf.token }]]);
+				},
+				type: 'DELETE',
+				url: '/delete-keywords?keywordIds=' + currentSelectedKeywords.join(",")
+			}
+			$.ajax(settings)
+				.done(function (result) {
+					showKeyDetails($('#m_tree_6').jstree(true).get_node($("#selectedCategory").val()));
+					$('#modal-deleted-keywords').modal('hide');
+				})
+				.fail(function (result) {
+					$('#modal-deleted-keywords').modal('hide');
+				});
+		});
+
+		$("#btnConfirmDeleteKeyword").on("click", function () {
+			var data = [];
+			var listEditDiv = $(".inputEditKeyword");
+			$.each(listEditDiv, function (i, v) {
+				var d = {};
+				d.keywordId = $(v).find("input.inputEditId").val();
+				d.keyword = $(v).find("input.inputEditKeywordTxt").val();
+				data.push(d);
+			})
+			var settings = {
+				beforeSend: function (xhr, options) {
+					xhr.setRequestHeader("content-type", "application/json; charset=utf-8");
+					xhr.setRequestHeader("X-CSRF-TOKEN", [[${ _csrf.token }]]);
+				},
+				type: 'PUT',
+				url: '/edit-keywords',
+				data: JSON.stringify(data)
+			}
+			$.ajax(settings)
+				.done(function (result) {
+					showKeyDetails($('#m_tree_6').jstree(true).get_node($("#selectedCategory").val()));
+					$('#modal-edit-keywords').modal('hide');
+				})
+				.fail(function (result) {
+					$('#modal-edit-keywords').modal('hide');
+				});
+		});
+		
+		$("#btnSearchCategory").on('click', function() {
+			search()
+		})
+		
+		$('#searchCategory').keyup(function(e){ 
+			var code = e.which; // recommended to use e.which, it's normalized across browsers
+		    if(code==13)e.preventDefault();
+			if(code==13){
+				search()
+		    } 
+		})
+		
+		function higlight(e){
+			$(e).addClass("highlight");
+		}
+	});
+
+
+	</script>
+</th:block>
+
+</html>

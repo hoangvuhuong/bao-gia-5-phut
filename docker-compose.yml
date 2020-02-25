@@ -1,0 +1,29 @@
+version: '3'
+
+networks:
+  adsplus:
+volumes:
+  mysql_data:
+      driver: local
+
+services:
+  mysql:
+    image: mysql:8
+    volumes:
+      - mysql_data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - 3306:3306
+    networks:
+      - adsplus
+  quotation:
+    image: adsplus/quotation
+    volumes:
+      - ./quotation-back-office/src/main/resources/templates/pdf/default:/src/main/resources/templates/pdf/default
+    ports:
+      - 9000:9000
+    networks:
+      - adsplus
+    depends_on:
+      - mysql
